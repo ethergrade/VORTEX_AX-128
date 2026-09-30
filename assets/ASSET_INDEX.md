@@ -15,6 +15,9 @@ Arduino IDE setup, memory/PSRAM checks and runtime validation screenshots.
 ## Modules
 `IMG_8824.jpg` — received CD74HC4067-class 16-channel analog multiplexer module used as keyboard column scanner.
 
+## key-art
+`key-art/` contains the Keymap V1.0, a CSV inventory/correlation of the local Flaticon SVG pack, and a script that generates a local visual review index. The original third-party SVG pack and generated preview are kept local and excluded from Git; see `key-art/README.md`.
+
 ## test_evidence
 
 Create one dated subfolder per physical prototype step:

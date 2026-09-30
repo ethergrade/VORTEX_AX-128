@@ -1,4 +1,17 @@
 .DS_Store
+node_modules/
+__pycache__/
+
+# Flaticon pack is a local review source; do not redistribute the original pack.
+assets/key-art/pack/
+assets/key-art/pack-index.html
+# Superseded font-glyph preview; cards are not standalone (uses an external font).
+assets/key-art/svg/
+assets/key-art/fonts/
+assets/key-art/index.html
+assets/key-art/keymap.json
+assets/key-art/package.json
+assets/key-art/package-lock.json
 
 # Local source material. Canonical, privacy-safe copies live under assets/.
 local-source/
@@ -12,4 +25,3 @@ build/
 *.bin
 *.elf
 *.map
-
