@@ -2,6 +2,10 @@
 
 ## Immediate Step 1 — CD74HC4067 validation
 
+Active firmware: `firmware/VortexMatrixScanner/`
+
+The modular scanner is configured for one row and two columns. Do not expand the active counts until this step passes on the physical prototype.
+
 Wire only:
 
 ```text

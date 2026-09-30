@@ -16,5 +16,7 @@
     "filters": "4x independent analog MS-20-inspired, LM13700 target"
   },
   "current_milestone": "M1-keyboard-matrix",
-  "current_next_step": "Compile and validate the modular CD74HC4067 C0/C1 + Row A test, then expand to all 16 columns"
+  "active_firmware": "firmware/VortexMatrixScanner",
+  "active_firmware_status": "COMPILED_NOT_HARDWARE_TESTED",
+  "current_next_step": "Flash and validate the modular CD74HC4067 C0/C1 + Row A test, then expand to all 16 columns"
 }

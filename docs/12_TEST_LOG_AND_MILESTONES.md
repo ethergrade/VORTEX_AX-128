@@ -104,3 +104,19 @@ Validate CD74HC4067 column scan using:
 - SIG -> 1 kΩ -> GND
 - EN -> GND
 - VCC -> 3.3 V
+
+## 2026-09-30 — repository and modular scanner preparation
+
+- Consolidated project documentation, privacy-safe photos and previous sketches in Git.
+- Added a modular C/C++ scanner with external configuration and keymap files.
+- Configured the active build for Row A and columns C0/C1 only.
+- Added three-scan debounce without dynamic memory allocation.
+
+Compile result with Arduino ESP32 core 3.3.12 and the ESP32S3 Dev Module target:
+
+```text
+Program storage: 304,888 bytes / 3,145,728 bytes (9%)
+Global variables: 23,192 bytes / 327,680 bytes (7%)
+```
+
+Software status: **COMPILED**. Hardware status remains **UNTESTED** until the CD74HC4067 bench test is completed.
