@@ -26,7 +26,7 @@ VORTEX AX-128 is an ESP32-S3 hardware instrument built around a repurposed Exper
 | `archive/` | Earlier monolithic project notes retained for history |
 | `PROJECT_MANIFEST.json` | Machine-readable project baseline and active milestone |
 
-Start with [`docs/00_PROJECT_HANDOFF.md`](docs/00_PROJECT_HANDOFF.md), then read [`docs/02_FROZEN_DECISIONS.md`](docs/02_FROZEN_DECISIONS.md) before changing pin assignments or architecture.
+For future work, first read [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md), then [`docs/00_PROJECT_HANDOFF.md`](docs/00_PROJECT_HANDOFF.md). Read [`docs/02_FROZEN_DECISIONS.md`](docs/02_FROZEN_DECISIONS.md) before changing pin assignments or architecture.
 
 ## Prototype discipline
 
@@ -44,4 +44,3 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for naming and evidence rules.
 Photos committed under `assets/` have been checked for location metadata. Original high-resolution photos remain local and are intentionally excluded from Git.
 
 External repositories and visual references are research inputs, not vendored dependencies. Their code and assets retain their own licenses. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and [`docs/15_OPEN_SOURCE_DSP_RESEARCH.md`](docs/15_OPEN_SOURCE_DSP_RESEARCH.md).
-
