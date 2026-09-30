@@ -27,6 +27,7 @@ This repository is the authoritative project baseline. It consolidates the previ
 15. `docs/15_OPEN_SOURCE_DSP_RESEARCH.md`
 16. `docs/16_LONG_REVERB_ENGINE.md`
 17. `docs/17_FIRMWARE_PROJECT_STRUCTURE.md`
+18. `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`
 
 ## Current project status
 

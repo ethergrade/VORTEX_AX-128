@@ -1,6 +1,15 @@
+%% Complete pin-by-pin table: docs/18_EK128_J1_PIN_BY_PIN_WIRING.md
 flowchart LR
-    ESP[ESP32-S3] -->|GPIO4/6/7/15| MUX[CD74HC4067 S0..S3]
-    GND[GND] -->|1k| SIG[SIG]
+    ESP[ESP32-S3] -->|GPIO4 / 6 / 7 / 15| MUX[CD74HC4067<br/>S0 / S1 / S2 / S3]
+    PWR[ESP32 3V3 + GND] -->|3V3 / GND| MUX
+    ENABLE[GND] -->|EN active-low| MUX
+    GND[GND] -->|approximately 1 kΩ| SIG[SIG]
     SIG --> MUX
-    MUX -->|C0..C15| COLS[EK-128 J1 even pins 2..32]
-    ROWS[EK-128 rows J1 3,5,7,9,11,13,15,17] -->|GPIO5,16,17,18,8,9,10,11| ESP
+
+    MUX -->|C0 to C7| COLA[J1 even pins 2 to 16<br/>Columns 1 to 8]
+    MUX -->|C8 to C15| COLB[J1 even pins 18 to 32<br/>Columns 9 to 16]
+
+    ROWSA[J1-3 / 5 / 7 / 9<br/>Rows A to D] -->|GPIO5 / 16 / 17 / 18| ESP
+    ROWSB[J1-11 / 13 / 15 / 17<br/>Rows E to H] -->|GPIO8 / 9 / 10 / 11| ESP
+
+    NC[J1-1 / 19 / 21 / 23 / 25 / 27 / 29 / 31<br/>Leave disconnected]

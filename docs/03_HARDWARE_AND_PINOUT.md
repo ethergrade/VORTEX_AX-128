@@ -1,5 +1,7 @@
 # 03 — Hardware and Frozen Pinout
 
+For one complete 32-pin wiring table, use [`18_EK128_J1_PIN_BY_PIN_WIRING.md`](18_EK128_J1_PIN_BY_PIN_WIRING.md).
+
 ## 1. EK-128 hardware
 
 Observed board identifiers:
