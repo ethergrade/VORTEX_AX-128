@@ -1,0 +1,20 @@
+{
+  "project": "VORTEX AX-128",
+  "subtitle": "ANALOG eXTENDED LAYER SYNTHESIZER / ANALOG FILTER • WAVE LAYER",
+  "repository": "https://github.com/ethergrade/VORTEX_AX-128",
+  "baseline_date": "2026-09-30",
+  "documentation_root": "docs",
+  "evidence_root": "assets/test_evidence",
+  "hardware": {
+    "controller": "Freenove ESP32-S3 N16R8",
+    "flash_mb": 16,
+    "psram_mb": 8,
+    "keyboard": "ExpertKeys/Tipro EK-128",
+    "matrix": "8x16 with diodes",
+    "column_mux": "CD74HC4067",
+    "displays": "2x identical 3.5in 480x320 ST7796-class",
+    "filters": "4x independent analog MS-20-inspired, LM13700 target"
+  },
+  "current_milestone": "M1-keyboard-matrix",
+  "current_next_step": "Compile and validate the modular CD74HC4067 C0/C1 + Row A test, then expand to all 16 columns"
+}

@@ -1,0 +1,6 @@
+flowchart LR
+    ESP[ESP32-S3] -->|GPIO4/6/7/15| MUX[CD74HC4067 S0..S3]
+    GND[GND] -->|1k| SIG[SIG]
+    SIG --> MUX
+    MUX -->|C0..C15| COLS[EK-128 J1 even pins 2..32]
+    ROWS[EK-128 rows J1 3,5,7,9,11,13,15,17] -->|GPIO5,16,17,18,8,9,10,11| ESP

@@ -1,0 +1,15 @@
+.DS_Store
+
+# Local source material. Canonical, privacy-safe copies live under assets/.
+local-source/
+
+# Local build/editor output
+.pio/
+.vscode/
+.idea/
+build/
+*.zip
+*.bin
+*.elf
+*.map
+

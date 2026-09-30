@@ -1,0 +1,18 @@
+flowchart LR
+    K[EK-128 8x16 Matrix] --> M[CD74HC4067 Column Scanner]
+    M --> E[ESP32-S3 N16R8]
+    E --> SD[microSD]
+    E --> GUI1[Display 1 ST7796]
+    E --> GUI2[Display 2 ST7796]
+    E --> D1[PCM5102A DAC A]
+    E --> D2[PCM5102A DAC B]
+    D1 --> F1[Analog Filter 1]
+    D1 --> F2[Analog Filter 2]
+    D2 --> F3[Analog Filter 3]
+    D2 --> F4[Analog Filter 4]
+    F1 --> MIX[Analog Mixer / Master]
+    F2 --> MIX
+    F3 --> MIX
+    F4 --> MIX
+    MIX --> LINE[Line Out]
+    MIX --> HP[TDA1308 Headphones]

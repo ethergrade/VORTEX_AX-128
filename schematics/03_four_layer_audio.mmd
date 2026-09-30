@@ -1,0 +1,11 @@
+flowchart LR
+    L1[Layer 1] --> DA1[DAC A Left] --> F1[MS20-style Filter 1]
+    L2[Layer 2] --> DA2[DAC A Right] --> F2[MS20-style Filter 2]
+    L3[Layer 3] --> DB1[DAC B Left] --> F3[MS20-style Filter 3]
+    L4[Layer 4] --> DB2[DAC B Right] --> F4[MS20-style Filter 4]
+    F1 --> MX[Analog Mix]
+    F2 --> MX
+    F3 --> MX
+    F4 --> MX
+    MX --> FX[Master FX]
+    FX --> OUT[Line / Headphone]

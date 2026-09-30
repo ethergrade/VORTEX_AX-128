@@ -1,0 +1,10 @@
+flowchart TD
+    DC[External certified DC supply] --> P[Internal power distribution]
+    P --> V33[3.3 V logic]
+    P --> V5[5 V audio/modules]
+    P --> VP[+12 V analog]
+    P --> VN[-12 V analog]
+    V33 --> ESP[ESP32 / mux / SD]
+    V5 --> HP[TDA1308 / compatible modules]
+    VP --> AF[Analog filters/op-amps]
+    VN --> AF
