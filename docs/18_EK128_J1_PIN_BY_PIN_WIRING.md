@@ -58,7 +58,9 @@ This is the single wiring table for the 32-pin `J1` connector between the EK-128
 
 ## Current A1/A2 test only
 
-Do not wire all 32 pins yet. For the current milestone connect only:
+The complete matrix uses **all eight identified row pins** (J1-3, 5, 7, 9, 11, 13, 15, 17) and all sixteen even-numbered column pins (J1-2 through J1-32), as listed in the table above. The remaining odd pins (J1-1, 19, 21, 23, 25, 27, 29, 31) are unidentified and must remain disconnected.
+
+For the **current A1/A2-only test**, the firmware scans only Row A and columns C0/C1. Therefore the only EK-128 matrix connections needed at this stage are:
 
 | From | To |
 |---|---|
@@ -66,7 +68,7 @@ Do not wire all 32 pins yet. For the current milestone connect only:
 | EK-128 `J1-4` | CD74HC4067 `C1` |
 | EK-128 `J1-3` | ESP32 `GPIO5` |
 
-Then use `firmware/VortexMatrixScanner/`, which is currently configured for one row and two columns.
+The other row wires may already be installed for the complete harness, but the current firmware will not scan them. Do not connect any unidentified J1 pin. Use `firmware/VortexMatrixScanner/`, currently configured for one row and two columns.
 
 ## Connection order
 
@@ -74,8 +76,7 @@ Then use `firmware/VortexMatrixScanner/`, which is currently configured for one 
 2. Connect the common ground between ESP32 and CD74HC4067.
 3. Connect `VCC` to **3.3 V**, not 5 V.
 4. Connect `EN`, `SIG` and S0–S3.
-5. Connect J1-2, J1-4 and J1-3 for the first test.
+5. For the A1/A2 test, connect J1-2, J1-4 and J1-3. For the complete harness, connect only the identified rows and columns in the table above; leave unidentified pins disconnected.
 6. Check every connection again before restoring USB power.
 
 The pin numbers in this document are the logical J1 numbers already confirmed during reverse engineering. Before wiring, identify pin 1 from the PCB marking/photo; do not assume connector orientation from cable colours.
-

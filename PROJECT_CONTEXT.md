@@ -22,6 +22,8 @@ VORTEX AX-128 is a dedicated four-layer hardware instrument, described as **ANAL
 
 The current documented milestone is keyboard matrix validation. The EK-128 is reverse engineered as an 8 × 16 diode matrix. The next bench step is the CD74HC4067 scanner on C0/C1 with Row A, followed by all 16 columns and then all eight rows. The scanner firmware is marked `COMPILED_NOT_HARDWARE_TESTED` in `PROJECT_MANIFEST.json`; do not describe the full scanner as hardware validated until the test log confirms it.
 
+The complete EK-128 J1 harness uses 16 even-numbered column pins J1-2 through J1-32 and eight identified odd-numbered row pins J1-3, 5, 7, 9, 11, 13, 15, 17. Remaining odd pins J1-1, 19, 21, 23, 25, 27, 29, 31 are unidentified and must remain disconnected. The initial A1/A2 firmware test only requires C0/J1-2, C1/J1-4, and Row A/J1-3; see `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md` for the complete mapping and staging details.
+
 The architecture target is four simultaneous layers, each routed through its own physically independent analog filter. The prototype DAC target is two PCM5102A stereo DACs providing four mono outputs. See `docs/00_PROJECT_HANDOFF.md` for status and read order, `docs/02_FROZEN_DECISIONS.md` for frozen design choices, and `docs/13_NEXT_STEPS.md` for the active hardware sequence.
 
 ## Frozen decisions
@@ -63,4 +65,3 @@ The initial direction is lightweight algorithmic reverb (candidate families incl
 - DSP research: `docs/15_OPEN_SOURCE_DSP_RESEARCH.md`
 - Long reverb: `docs/16_LONG_REVERB_ENGINE.md`
 - Test evidence and milestones: `docs/12_TEST_LOG_AND_MILESTONES.md`, `assets/test_evidence/`
-
