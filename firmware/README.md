@@ -26,3 +26,5 @@ The user confirmed press and release events for all 128 keys through the CD74HC4
 ## Next diagnostic sketch
 
 `VortexSDTest/` is a separate **COMPILED** microSD SPI/WAV/PSRAM test. The user's photographed breakout is labeled `3V3` and has six identified pads. See its README and `docs/20_MICROSD_SPI_TEST_WIRING.md` for the temporary wiring and generated test WAV.
+
+`VortexDisplayTest/` is a separate **COMPILED** first-LCD colour-bar test for the photographed 14-pin ST7796-family module. It shares the temporary SPI clock/data GPIOs with `VortexSDTest`, uses its own LCD chip-select, and does not use touch or the display's onboard SD slot. See its README and `docs/21_FIRST_SPI_DISPLAY_WIRING.md`. Physical display operation is still **UNTESTED**.

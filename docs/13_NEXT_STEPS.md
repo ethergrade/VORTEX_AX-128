@@ -17,6 +17,10 @@ Validate:
 - WAV enumeration;
 - PSRAM loading.
 
+## Prepared in parallel — first SPI display
+
+The user supplied the first display's rear pin labels. `firmware/VortexDisplayTest/` is a separate **COMPILED**, hardware-untested LCD smoke test. Use [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md) to connect only the LCD signals and power; touch and the display's microSD slot remain unused. Confirm the exact front model and photograph the colour-bar result, then record the serial output. This preparation does not change the primary microSD milestone or freeze the final display bus.
+
 ## Step 6 — first PCM5102A
 
 Play a WAV through I2S.
@@ -35,7 +39,7 @@ Add second CD74HC4067 or equivalent control multiplexer.
 
 ## Step 10 — displays
 
-Bring up one ST7796, then two.
+After the first-display bench result, plan and validate two identical displays together.
 
 ## Step 11 — analog filter prototype
 

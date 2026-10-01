@@ -4,6 +4,8 @@ This wiring applies to the user's photographed six-pin microSD breakout and the 
 
 The module's rear silkscreen identifies its pads. With the **rear side facing you, socket on the left, and six pads on the right**, they run **top to bottom** as `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Use the printed labels as the authority if the module is rotated.
 
+Privacy-safe copies of the user's two module photos are in [`assets/Modules/`](../assets/Modules/). The separate first-display smoke test reuses `GPIO12`/`13`/`14` for SPI but assigns the display its own `LCD_CS = GPIO1`; see [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md). The display module's supply is different from this breakout's `3V3` supply.
+
 | Module pad | Freenove ESP32-S3 | Purpose |
 |---|---|---|
 | `3V3` (top square pad) | `3V3` | 3.3 V supply; do not connect to `5V` |

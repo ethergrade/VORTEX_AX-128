@@ -30,6 +30,7 @@ This repository is the authoritative project baseline. It consolidates the previ
 18. `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`
 19. `docs/19_ESP32_AUDIO_MIXER_CONTROL_RESEARCH.md`
 20. `docs/20_MICROSD_SPI_TEST_WIRING.md`
+21. `docs/21_FIRST_SPI_DISPLAY_WIRING.md`
 
 ## Current project status
 
@@ -46,6 +47,8 @@ The EK-128 matrix has been reverse engineered as an 8 × 16 key matrix with per-
 A1 and A2 were read successfully by the ESP32-S3 with direct GPIO scanning, including simultaneous/overlapping presses.
 
 On 2026-10-02, the user confirmed that all 128 keys produce press and release events with the CD74HC4067-based scanner, the physical key mapping is exact, multiple presses work, and the mux temperature is normal after correcting reversed VCC/GND wiring. The keyboard milestone is complete; microSD validation is next. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
+
+The six-pin microSD diagnostic and first ST7796-family LCD smoke test are now prepared and compiled as separate sketches. Both still need physical bench results. The user's module photos are stored as GPS-free copies under `assets/Modules/` and `assets/Displays/`; consult docs 20 and 21 for their temporary wiring.
 
 ## Important rule
 

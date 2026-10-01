@@ -20,7 +20,7 @@ This file is the concise starting context for future work in this repository. Th
 
 VORTEX AX-128 is a dedicated four-layer hardware instrument, described as **ANALOG eXTENDED LAYER SYNTHESIZER / ANALOG FILTER • WAVE LAYER**. It is built around an ESP32-S3 Freenove N16R8 (16 MB flash, 8 MB PSRAM, 240 MHz) and an ExpertKeys/Tipro EK-128 keyboard. It is not a modular desktop synth; external synth projects are research references for extracting or independently implementing suitable algorithms.
 
-The EK-128 is reverse engineered as an 8 × 16 diode matrix. On 2026-10-02, the user reported press and release events for all 128 keys, exact physical key-to-coordinate correspondence, working multiple simultaneous presses, and normal CD74HC4067 temperature after correcting reversed VCC/GND wiring. The full scanner is marked `TESTED` in `PROJECT_MANIFEST.json`; the keyboard milestone is complete. The next step is microSD validation; see `docs/12_TEST_LOG_AND_MILESTONES.md` and `docs/13_NEXT_STEPS.md`.
+The EK-128 is reverse engineered as an 8 × 16 diode matrix. On 2026-10-02, the user reported press and release events for all 128 keys, exact physical key-to-coordinate correspondence, working multiple simultaneous presses, and normal CD74HC4067 temperature after correcting reversed VCC/GND wiring. The full scanner is marked `TESTED` in `PROJECT_MANIFEST.json`; the keyboard milestone is complete. The next step is microSD validation; a separate first-display LCD smoke test has also been prepared. Both microSD and display hardware tests remain pending. See `docs/12_TEST_LOG_AND_MILESTONES.md` and `docs/13_NEXT_STEPS.md`.
 
 The complete EK-128 J1 harness uses 16 even-numbered column pins J1-2 through J1-32 and eight identified odd-numbered row pins J1-3, 5, 7, 9, 11, 13, 15, 17. Remaining odd pins J1-1, 19, 21, 23, 25, 27, 29, 31 are unidentified and must remain disconnected. See `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md` for the complete mapping.
 
@@ -61,7 +61,7 @@ The initial direction is lightweight algorithmic reverb (candidate families incl
 
 - Project overview and current handoff: `README.md`, `docs/00_PROJECT_HANDOFF.md`
 - Frozen decisions: `docs/02_FROZEN_DECISIONS.md`
-- Hardware, wiring, and scanner: `docs/03_HARDWARE_AND_PINOUT.md`, `docs/04_EK128_MATRIX_REVERSE_ENGINEERING.md`, `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`, `docs/20_MICROSD_SPI_TEST_WIRING.md`, `docs/13_NEXT_STEPS.md`
+- Hardware, wiring, and scanner: `docs/03_HARDWARE_AND_PINOUT.md`, `docs/04_EK128_MATRIX_REVERSE_ENGINEERING.md`, `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`, `docs/20_MICROSD_SPI_TEST_WIRING.md`, `docs/21_FIRST_SPI_DISPLAY_WIRING.md`, `docs/13_NEXT_STEPS.md`
 - DSP research: `docs/15_OPEN_SOURCE_DSP_RESEARCH.md`
 - Long reverb: `docs/16_LONG_REVERB_ENGINE.md`
 - ESP32 audio/mixer/control research and proposed implementation: `docs/19_ESP32_AUDIO_MIXER_CONTROL_RESEARCH.md`

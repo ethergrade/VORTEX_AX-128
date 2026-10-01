@@ -15,6 +15,12 @@ Arduino IDE setup, memory/PSRAM checks and runtime validation screenshots.
 ## Modules
 `IMG_8824.jpg` — received CD74HC4067-class 16-channel analog multiplexer module used as keyboard column scanner.
 
+`IMG_8862_no_metadata.jpg` and `IMG_8863_no_metadata.jpg` — rear and front views of the six-pad, 3.3 V microSD SPI breakout used by `VortexSDTest`.
+
+## Displays
+
+`IMG_8864_no_metadata.jpg` — rear view of the first 14-pin SPI TFT with capacitive-touch flex and onboard microSD socket. Use its printed labels for the first display wiring; exact product model is still to be confirmed.
+
 ## key-art
 `key-art/` contains the Keymap V1.0, a CSV inventory/correlation of the local Flaticon SVG pack, and a script that generates a local visual review index. The original third-party SVG pack and generated preview are kept local and excluded from Git; see `key-art/README.md`.
 

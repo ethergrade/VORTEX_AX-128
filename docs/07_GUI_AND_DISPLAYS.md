@@ -12,6 +12,8 @@ Two identical displays:
 
 Touch is optional and not needed for the first version.
 
+The first user-supplied board has a photographed 14-pin header, capacitive-touch flex and onboard microSD socket. Its pinout matches the ST7796 MSP3526 family; the exact front model/size is still unconfirmed. A separate LCD-only smoke test and temporary wiring are in [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md). Do not infer that the second display, shared-bus arrangement or touch wiring is finalized from this bench test.
+
 ## Default roles
 
 ### Left display

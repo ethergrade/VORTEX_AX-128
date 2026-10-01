@@ -2,6 +2,8 @@
 
 For one complete 32-pin wiring table, use [`18_EK128_J1_PIN_BY_PIN_WIRING.md`](18_EK128_J1_PIN_BY_PIN_WIRING.md).
 
+For the separate microSD and first-display bench wiring, use [`20_MICROSD_SPI_TEST_WIRING.md`](20_MICROSD_SPI_TEST_WIRING.md) and [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md). Their SPI GPIOs are temporary and do not revise the frozen keyboard scanner map.
+
 ## 1. EK-128 hardware
 
 Observed board identifiers:

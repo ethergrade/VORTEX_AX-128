@@ -138,3 +138,12 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The sketch compiled for `ESP32S3 Dev Module` with the installed Arduino ESP32 core 3.3.12.
 - The user's module photos identify a six-pad breakout labeled `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Temporary signal assignments and the 3.3 V supply connection are recorded in `docs/20_MICROSD_SPI_TEST_WIRING.md`.
 - Hardware status: **UNTESTED**. No wiring, card mount, WAV enumeration, or PSRAM copy result is claimed yet.
+
+## 2026-10-02 — first SPI display diagnostic prepared
+
+- The user supplied a rear photo of a 14-pin SPI TFT with capacitive-touch flex and onboard microSD socket. The printed labels and component layout match the LCDWiki MSP3526/ST7796 board family; exact front model/size and controller remain to be confirmed.
+- Prepared the separate `firmware/VortexDisplayTest/` sketch, using the previously selected `GPIO12`/`13`/`14` SPI wires and separate `LCD_CS = GPIO1`, `LCD_RS = GPIO38`, `LCD_RST = GPIO47`. It uses only `SPI.h`, sends the manufacturer's ST7796 initialization sequence, displays RGB colour bands and blinks a white block.
+- The exact Arduino sketchbook copy also compiled for `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and USB CDC with Arduino ESP32 core 3.3.12: 308,244 bytes of program storage and 22,880 bytes of global variables. The user has not yet reported a powered display result.
+- The manufacturer's schematic indicates that touch I²C pins may rise to the display's 5 V `VCC`; all `CTP_*` pins, `LED` and display-slot `SD_CS` are intentionally left disconnected in this first test.
+- Privacy-safe copies of the user's two microSD photos and display rear photo were added to the project assets after location metadata was removed and checked.
+- Firmware status: **COMPILED**. Hardware status: **UNTESTED**. The microSD diagnostic is also still awaiting its physical test.
