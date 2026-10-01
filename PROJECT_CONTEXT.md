@@ -64,4 +64,5 @@ The initial direction is lightweight algorithmic reverb (candidate families incl
 - Hardware, wiring, and scanner: `docs/03_HARDWARE_AND_PINOUT.md`, `docs/04_EK128_MATRIX_REVERSE_ENGINEERING.md`, `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`, `docs/13_NEXT_STEPS.md`
 - DSP research: `docs/15_OPEN_SOURCE_DSP_RESEARCH.md`
 - Long reverb: `docs/16_LONG_REVERB_ENGINE.md`
+- ESP32 audio/mixer/control research and proposed implementation: `docs/19_ESP32_AUDIO_MIXER_CONTROL_RESEARCH.md`
 - Test evidence and milestones: `docs/12_TEST_LOG_AND_MILESTONES.md`, `assets/test_evidence/`
