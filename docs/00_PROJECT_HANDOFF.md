@@ -43,7 +43,7 @@ The EK-128 matrix has been reverse engineered as an 8 × 16 key matrix with per-
 
 A1 and A2 were read successfully by the ESP32-S3 with direct GPIO scanning, including simultaneous/overlapping presses.
 
-On 2026-10-02, the user reported that all 128 keys produced press and release events with the CD74HC4067-based scanner. The next checks are physical key-to-coordinate correspondence, overlapping presses through the mux, and normal mux temperature after correcting reversed VCC/GND wiring. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
+On 2026-10-02, the user confirmed that all 128 keys produce press and release events with the CD74HC4067-based scanner, the physical key mapping is exact, multiple presses work, and the mux temperature is normal after correcting reversed VCC/GND wiring. The keyboard milestone is complete; microSD validation is next. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
 
 ## Important rule
 

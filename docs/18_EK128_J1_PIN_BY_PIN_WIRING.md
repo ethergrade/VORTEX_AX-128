@@ -56,7 +56,7 @@ This is the single wiring table for the 32-pin `J1` connector between the EK-128
 | `S3` | ESP32 `GPIO15` | Channel address bit 3 |
 | `SIG` | `GND` through approximately `1 kΩ` | Pulls only the selected column LOW |
 
-On 2026-10-02, the user reported press and release events for all 128 keys with the full harness. The mux had previously become hot because VCC and GND were reversed; verify polarity and normal temperature before further tests. This report does not independently confirm physical key labels or simultaneous key combinations.
+On 2026-10-02, the user confirmed press and release events for all 128 keys with the full harness, exact physical key mapping, working multiple presses, and normal mux temperature. VCC and GND had initially been reversed and were corrected before the successful test.
 
 ## Initial A1/A2 wiring check
 

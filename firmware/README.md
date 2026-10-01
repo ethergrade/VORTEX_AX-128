@@ -21,4 +21,4 @@ Current test configuration:
 - serial events include matrix coordinate, VORTEX function name, J1 pins, ESP32 row GPIO, and mux channel;
 - a running count of distinct pressed keys, plus commands to list missing keys or print the complete map.
 
-The user reported press and release events for all 128 keys through the CD74HC4067 on 2026-10-02. Physical key-to-coordinate labels, overlapping presses through the mux, and normal mux temperature after correcting reversed VCC/GND remain to be checked. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
+The user confirmed press and release events for all 128 keys through the CD74HC4067 on 2026-10-02, exact physical mapping, working multiple presses, and normal mux temperature after correcting reversed VCC/GND. See `docs/12_TEST_LOG_AND_MILESTONES.md`.

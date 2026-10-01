@@ -15,8 +15,8 @@
     "displays": "2x identical 3.5in 480x320 ST7796-class",
     "filters": "4x independent analog MS-20-inspired, LM13700 target"
   },
-  "current_milestone": "M1-keyboard-matrix",
+  "current_milestone": "M2-microSD",
   "active_firmware": "firmware/VortexMatrixScanner",
   "active_firmware_status": "TESTED",
-  "current_next_step": "Verify physical key-to-coordinate labels, overlapping presses, and mux temperature after the corrected VCC/GND wiring; then proceed to microSD"
+  "current_next_step": "Validate microSD filesystem, sample directory, WAV enumeration, and PSRAM loading"
 }

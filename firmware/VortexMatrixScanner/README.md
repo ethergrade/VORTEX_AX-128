@@ -1,6 +1,6 @@
 # VortexMatrixScanner
 
-**Status: TESTED — user reported press and release events for all 128 keys through the CD74HC4067 on 2026-10-02.**
+**Status: TESTED — user confirmed all 128 keys, exact mapping, multiple presses, and normal mux temperature on 2026-10-02.**
 
 This scanner reads all 128 coordinates. Each key has a 20 ms debounce window. Do not power the circuit if the multiplexer becomes hot: disconnect USB and diagnose the wiring before running this test.
 
@@ -47,8 +47,6 @@ Press each physical key and compare its position with the printed coordinate and
 - PSRAM: OPI 8 MB
 - USB CDC On Boot: Enabled
 
-## Remaining bench checks
+## Bench result
 
-1. Confirm the mux runs at a normal temperature after correcting the earlier VCC/GND reversal. If it heats again, disconnect power.
-2. Compare physical key locations with the printed coordinates and names.
-3. Test overlapping presses through the mux across rows and columns.
+The user confirmed press and release events for every key, exact physical key-to-coordinate correspondence, working multiple presses, and normal mux temperature after correcting an earlier VCC/GND reversal. See [`docs/12_TEST_LOG_AND_MILESTONES.md`](../../docs/12_TEST_LOG_AND_MILESTONES.md). No Serial Monitor capture or exhaustive key-combination matrix was supplied.

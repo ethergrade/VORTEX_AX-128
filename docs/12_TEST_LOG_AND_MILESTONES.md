@@ -123,9 +123,10 @@ Software status: **COMPILED**. Hardware status remains **UNTESTED** until the CD
 
 ## 2026-10-02 — complete EK-128 scan, user-reported bench result
 
-- The user identified that the CD74HC4067 module had initially been connected with VCC and GND reversed after it became very hot. The wiring was corrected before the full-key result was reported. Normal operating temperature after correction was not explicitly confirmed.
+- The user identified that the CD74HC4067 module had initially been connected with VCC and GND reversed after it became very hot. The wiring was corrected before the full-key result was reported.
 - The full 8 × 16 modular scanner was compiled for the ESP32-S3. The Arduino sketch folder was completed with `Keymap.h/.cpp`, `MatrixScanner.h/.cpp`, and `VortexConfig.h`; that exact folder compiled successfully.
 - The user reported: “funzionano tutti i tasti, premuto e rilasciato.” This confirms reported press and release events for all 128 physical keys through the mux.
-- No Serial Monitor capture or photo of this test was supplied. Physical key-to-coordinate/label correspondence and simultaneous key combinations through the mux were not explicitly confirmed.
+- The user subsequently confirmed exact physical key-to-coordinate correspondence, working multiple simultaneous presses, and normal multiplexer temperature after the wiring correction.
+- No Serial Monitor capture, photo, temperature measurement, or exhaustive key-combination matrix was supplied; the above is a user-reported bench result.
 
-Firmware status for this reported scope: **TESTED**. Follow-up checks are listed in `docs/13_NEXT_STEPS.md`.
+Firmware status for this reported scope: **TESTED**. The keyboard milestone is complete; microSD validation is next in `docs/13_NEXT_STEPS.md`.

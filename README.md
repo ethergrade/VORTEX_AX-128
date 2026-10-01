@@ -9,9 +9,8 @@ VORTEX AX-128 is an ESP32-S3 hardware instrument built around a repurposed Exper
 
 - Freenove ESP32-S3 N16R8 validated at 240 MHz with 16 MB Flash and 8 MB PSRAM.
 - EK-128 reverse engineered as an 8 × 16 matrix with per-key diodes.
-- All 128 EK-128 keys reported working with press and release events through the CD74HC4067 scanner (2026-10-02).
-- A1 and A2 were also validated earlier with overlapping presses using direct GPIO scanning.
-- Physical key-to-coordinate labels, overlapping presses through the mux, and mux temperature after correcting reversed VCC/GND remain to be checked.
+- EK-128 keyboard milestone complete (2026-10-02): the user confirmed press/release events for all 128 keys, exact physical mapping, multiple simultaneous presses, and normal CD74HC4067 temperature after correcting VCC/GND wiring.
+- Next prototype step: validate microSD and WAV loading.
 
 ![CD74HC4067 module used for keyboard scanning](assets/Modules/IMG_8824.jpg)
 
