@@ -36,15 +36,15 @@ void MatrixScanner::updateKey(uint8_t row,
                               uint8_t column,
                               bool pressed,
                               KeyEventHandler handler) {
+  const uint32_t now = millis();
   if (pressed != rawState_[row][column]) {
     rawState_[row][column] = pressed;
-    stableScanCount_[row][column] = 1;
-  } else if (stableScanCount_[row][column] < config::kDebounceScanCount) {
-    ++stableScanCount_[row][column];
+    rawChangedAtMillis_[row][column] = now;
   }
 
-  const bool isStable = stableScanCount_[row][column] >= config::kDebounceScanCount;
-  if (!isStable || stableState_[row][column] == rawState_[row][column]) {
+  if (stableState_[row][column] == rawState_[row][column] ||
+      static_cast<uint32_t>(now - rawChangedAtMillis_[row][column]) <
+          config::kDebounceMillis) {
     return;
   }
 
@@ -55,4 +55,3 @@ void MatrixScanner::updateKey(uint8_t row,
 }
 
 }  // namespace vortex
-

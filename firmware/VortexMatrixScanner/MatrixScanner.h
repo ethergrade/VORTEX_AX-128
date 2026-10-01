@@ -25,8 +25,7 @@ class MatrixScanner {
 
   bool rawState_[config::kMaxRowCount][config::kMaxColumnCount] = {};
   bool stableState_[config::kMaxRowCount][config::kMaxColumnCount] = {};
-  uint8_t stableScanCount_[config::kMaxRowCount][config::kMaxColumnCount] = {};
+  uint32_t rawChangedAtMillis_[config::kMaxRowCount][config::kMaxColumnCount] = {};
 };
 
 }  // namespace vortex
-

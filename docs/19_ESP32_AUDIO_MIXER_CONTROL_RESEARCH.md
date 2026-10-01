@@ -5,7 +5,7 @@ Ricerca del 2026-10-01. Questa è una proposta tecnica, non modifica le decision
 ## Base VORTEX verificata
 
 - ESP32-S3 Freenove N16R8, quattro layer simultanei, due PCM5102A stereo per quattro uscite mono, un filtro analogico indipendente per layer.
-- La tastiera EK-128 è mappata 8 × 16; lo scanner con CD74HC4067 ha pin assegnati, ma il test hardware dello scanner modulare C0/C1 è ancora il prossimo gate documentato.
+- La tastiera EK-128 è mappata 8 × 16. Aggiornamento del 2026-10-02: l'utente ha riferito eventi di pressione e rilascio per tutti i 128 tasti con lo scanner CD74HC4067; restano da verificare la corrispondenza fisica dei tasti, le pressioni simultanee tramite mux e la temperatura del modulo.
 - Riverbero lungo per layer: requisito del progetto; partire da algoritmi compatti e misurare prima di promettere quattro istanze complete.
 - IC posseduti elencati in `11_COMPONENT_INVENTORY_BOM.md`: in particolare NE5532, LM324, LM358, LM393. L'utente ha inoltre riferito di possedere altri quattro CD74HC4067; nella working copy c'è un datasheet MCP3008, ma la disponibilità fisica del chip non è confermata dal solo datasheet.
 - Nessuno slider. Manopole con potenziometro rotativo per funzioni sempre visibili; encoder rotativi a rotazione continua, possibilmente con pressione, solo per parametri di pagina.

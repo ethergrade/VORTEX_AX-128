@@ -56,11 +56,13 @@ This is the single wiring table for the 32-pin `J1` connector between the EK-128
 | `S3` | ESP32 `GPIO15` | Channel address bit 3 |
 | `SIG` | `GND` through approximately `1 kΩ` | Pulls only the selected column LOW |
 
-## Current A1/A2 test only
+On 2026-10-02, the user reported press and release events for all 128 keys with the full harness. The mux had previously become hot because VCC and GND were reversed; verify polarity and normal temperature before further tests. This report does not independently confirm physical key labels or simultaneous key combinations.
+
+## Initial A1/A2 wiring check
 
 The complete matrix uses **all eight identified row pins** (J1-3, 5, 7, 9, 11, 13, 15, 17) and all sixteen even-numbered column pins (J1-2 through J1-32), as listed in the table above. The remaining odd pins (J1-1, 19, 21, 23, 25, 27, 29, 31) are unidentified and must remain disconnected.
 
-For the **current A1/A2-only test**, the firmware scans only Row A and columns C0/C1. Therefore the only EK-128 matrix connections needed at this stage are:
+For the **initial A1/A2 wiring check**, only Row A and columns C0/C1 need to be connected, even though the full test firmware scans all coordinates. The necessary EK-128 matrix connections are:
 
 | From | To |
 |---|---|
@@ -68,7 +70,7 @@ For the **current A1/A2-only test**, the firmware scans only Row A and columns C
 | EK-128 `J1-4` | CD74HC4067 `C1` |
 | EK-128 `J1-3` | ESP32 `GPIO5` |
 
-The other row wires may already be installed for the complete harness, but the current firmware will not scan them. Do not connect any unidentified J1 pin. Use `firmware/VortexMatrixScanner/`, currently configured for one row and two columns.
+The other row wires may already be installed for the complete harness. Do not connect any unidentified J1 pin. `firmware/VortexMatrixScanner/` is now configured for all eight rows and sixteen columns; use the A1/A2 connections above for the first hardware check, then complete the harness to test all keys.
 
 ## Connection order
 

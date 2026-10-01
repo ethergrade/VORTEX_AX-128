@@ -1,79 +1,17 @@
 # 13 — Next Steps
 
-## Immediate Step 1 — CD74HC4067 validation
+## Completed — full EK-128 scan (reported 2026-10-02)
 
 Active firmware: `firmware/VortexMatrixScanner/`
 
-The modular scanner is configured for one row and two columns. Do not expand the active counts until this step passes on the physical prototype.
+The scanner is configured for eight rows and sixteen columns. The user reported press and release events for all 128 physical keys through the CD74HC4067. See `docs/12_TEST_LOG_AND_MILESTONES.md` for the exact scope and the earlier VCC/GND inversion.
 
-Wire only:
+## Next check — physical map and electrical stability
 
-```text
-VCC -> 3.3 V
-GND -> common GND
-EN -> GND
-SIG -> 1 kΩ -> GND
-
-S0 -> GPIO4
-S1 -> GPIO6
-S2 -> GPIO7
-S3 -> GPIO15
-
-C0 -> J1-2
-C1 -> J1-4
-
-J1-3 -> GPIO5
-```
-
-Test A1/A2 using the mux.
-
-Success condition:
-
-- A1 and A2 remain independently readable;
-- overlapping press behaviour remains correct.
-
-## Immediate Step 2 — all 16 columns
-
-Connect:
-
-```text
-C0..C15 -> J1 even 2..32
-```
-
-Test Row A:
-
-```text
-A1..A16
-```
-
-## Immediate Step 3 — all 8 rows
-
-Connect:
-
-```text
-J1-3  -> GPIO5
-J1-5  -> GPIO16
-J1-7  -> GPIO17
-J1-9  -> GPIO18
-J1-11 -> GPIO8
-J1-13 -> GPIO9
-J1-15 -> GPIO10
-J1-17 -> GPIO11
-```
-
-Run full 128-key scanner.
-
-## Step 4 — map physical keys to VORTEX keymap
-
-Serial should print both coordinates and function names, for example:
-
-```text
-A1 PRESSED - LAYER 1
-A10 PRESSED - GRANULAR
-C1 PRESSED - BD
-G6 PRESSED - DELAY
-H16 PRESSED - SCENE 8
-```
+1. Confirm the mux stays at a normal temperature with VCC/GND corrected. If it heats again, disconnect power and replace or isolate the damaged module before continuing.
+2. Compare each physical key's location and label with the serial coordinate and function name. The 128/128 counter only proves that 128 coordinates generated press events.
+3. Test overlapping presses through the mux across different rows and columns, including press/release order.
+4. Save one Serial Monitor capture or concise result under `assets/test_evidence/2026-10-02/` if available.
 
 ## Step 5 — microSD
 

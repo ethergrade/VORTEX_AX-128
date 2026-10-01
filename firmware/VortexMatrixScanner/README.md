@@ -1,10 +1,10 @@
 # VortexMatrixScanner
 
-**Status: COMPILED — not yet validated on the physical CD74HC4067 setup.**
+**Status: TESTED — user reported press and release events for all 128 keys through the CD74HC4067 on 2026-10-02.**
 
-This is the active modular keyboard scanner. The first configuration intentionally scans only A1 and A2.
+This scanner reads all 128 coordinates. Each key has a 20 ms debounce window. Do not power the circuit if the multiplexer becomes hot: disconnect USB and diagnose the wiring before running this test.
 
-## Wiring for this step
+## Wiring
 
 ```text
 ESP32-S3             CD74HC4067
@@ -18,27 +18,25 @@ GPIO15           ->  S3
 GND through 1kΩ  ->  SIG
 
 CD74HC4067           EK-128 J1
-C0               ->  J1-2
-C1               ->  J1-4
+C0..C15          ->  J1-2, J1-4, ... J1-32
 
 ESP32-S3             EK-128 J1
-GPIO5 INPUT_PULLUP -> J1-3 (Row A)
+GPIO5, 16, 17, 18 -> J1-3, 5, 7, 9 (Rows A..D)
+GPIO8, 9, 10, 11  -> J1-11, 13, 15, 17 (Rows E..H)
 ```
 
-Keep the original EK-128 controller disconnected.
+Keep the original EK-128 controller disconnected. The complete pin mapping and the unidentified pins to leave open are in [`docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`](../../docs/18_EK128_J1_PIN_BY_PIN_WIRING.md).
 
-## Expected Serial Monitor output
+## Serial Monitor at 115200 baud
 
 ```text
-VORTEX AX-128 - MODULAR MATRIX SCANNER
-Rows: 1 | Columns: 2 | Debounce scans: 3
-A1 LAYER 1 PRESSED
-A1 LAYER 1 RELEASED
-A2 LAYER 2 PRESSED
-A2 LAYER 2 RELEASED
+VORTEX AX-128 - TEST MATRICE EK-128
+Righe: 8 | Colonne: 16 | Antirimbalzo: 20 ms
+A1 | LAYER 1 | riga J1-3/GPIO5 | colonna J1-2/C0 | PREMUTO | TESTATI 1/128
+A1 | LAYER 1 | riga J1-3/GPIO5 | colonna J1-2/C0 | RILASCIATO
 ```
 
-Also test overlapping presses: hold A1, press A2, release A1, then release A2.
+Press each physical key and compare its position with the printed coordinate and function name. The count records distinct coordinates seen at least once; it cannot prove that a key is wired to the intended position. Send `m` for missing keys, `p` for the full 128-key map, `r` to reset the count, or `?` for help. After a reset, release and press any keys still held to count them again.
 
 ## Compile target
 
@@ -49,11 +47,8 @@ Also test overlapping presses: hold A1, press A2, release A1, then release A2.
 - PSRAM: OPI 8 MB
 - USB CDC On Boot: Enabled
 
-## Expansion sequence
+## Remaining bench checks
 
-1. Confirm A1/A2.
-2. Set `kActiveColumnCount = 16` and connect C0–C15.
-3. Confirm A1–A16.
-4. Connect the remaining seven rows.
-5. Set `kActiveRowCount = 8` and validate all 128 keys.
-
+1. Confirm the mux runs at a normal temperature after correcting the earlier VCC/GND reversal. If it heats again, disconnect power.
+2. Compare physical key locations with the printed coordinates and names.
+3. Test overlapping presses through the mux across rows and columns.

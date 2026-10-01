@@ -93,7 +93,7 @@ This validates:
 - simultaneous key handling;
 - event detection.
 
-## Current next test
+## Planned next test at that stage
 
 Validate CD74HC4067 column scan using:
 
@@ -120,3 +120,12 @@ Global variables: 23,192 bytes / 327,680 bytes (7%)
 ```
 
 Software status: **COMPILED**. Hardware status remains **UNTESTED** until the CD74HC4067 bench test is completed.
+
+## 2026-10-02 — complete EK-128 scan, user-reported bench result
+
+- The user identified that the CD74HC4067 module had initially been connected with VCC and GND reversed after it became very hot. The wiring was corrected before the full-key result was reported. Normal operating temperature after correction was not explicitly confirmed.
+- The full 8 × 16 modular scanner was compiled for the ESP32-S3. The Arduino sketch folder was completed with `Keymap.h/.cpp`, `MatrixScanner.h/.cpp`, and `VortexConfig.h`; that exact folder compiled successfully.
+- The user reported: “funzionano tutti i tasti, premuto e rilasciato.” This confirms reported press and release events for all 128 physical keys through the mux.
+- No Serial Monitor capture or photo of this test was supplied. Physical key-to-coordinate/label correspondence and simultaneous key combinations through the mux were not explicitly confirmed.
+
+Firmware status for this reported scope: **TESTED**. Follow-up checks are listed in `docs/13_NEXT_STEPS.md`.

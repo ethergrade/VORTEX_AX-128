@@ -41,9 +41,9 @@ The Freenove ESP32-S3 N16R8 has been validated on macOS with Arduino IDE:
 
 The EK-128 matrix has been reverse engineered as an 8 × 16 key matrix with per-key diodes.
 
-A1 and A2 have already been read successfully by the ESP32-S3, including simultaneous/overlapping presses.
+A1 and A2 were read successfully by the ESP32-S3 with direct GPIO scanning, including simultaneous/overlapping presses.
 
-The next hardware step is to validate the **CD74HC4067-based 16-column scanner** using only C0/C1 + Row A, then expand to the complete 128-key scan.
+On 2026-10-02, the user reported that all 128 keys produced press and release events with the CD74HC4067-based scanner. The next checks are physical key-to-coordinate correspondence, overlapping presses through the mux, and normal mux temperature after correcting reversed VCC/GND wiring. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
 
 ## Important rule
 

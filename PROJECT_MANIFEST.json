@@ -17,6 +17,6 @@
   },
   "current_milestone": "M1-keyboard-matrix",
   "active_firmware": "firmware/VortexMatrixScanner",
-  "active_firmware_status": "COMPILED_NOT_HARDWARE_TESTED",
-  "current_next_step": "Flash and validate the modular CD74HC4067 C0/C1 + Row A test, then expand to all 16 columns"
+  "active_firmware_status": "TESTED",
+  "current_next_step": "Verify physical key-to-coordinate labels, overlapping presses, and mux temperature after the corrected VCC/GND wiring; then proceed to microSD"
 }
