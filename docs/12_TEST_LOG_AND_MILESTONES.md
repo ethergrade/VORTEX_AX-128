@@ -130,3 +130,11 @@ Software status: **COMPILED**. Hardware status remains **UNTESTED** until the CD
 - No Serial Monitor capture, photo, temperature measurement, or exhaustive key-combination matrix was supplied; the above is a user-reported bench result.
 
 Firmware status for this reported scope: **TESTED**. The keyboard milestone is complete; microSD validation is next in `docs/13_NEXT_STEPS.md`.
+
+## 2026-10-02 — microSD diagnostic prepared
+
+- Added a separate SPI microSD sketch to detect the card, list `/samples`, inspect PCM16 WAV files, and copy up to 64 KiB of sample data into PSRAM.
+- Generated a 1-second 44.1 kHz mono PCM16 test WAV for the card.
+- The sketch compiled for `ESP32S3 Dev Module` with the installed Arduino ESP32 core 3.3.12.
+- The user's module photos identify a six-pad breakout labeled `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Temporary signal assignments and the 3.3 V supply connection are recorded in `docs/20_MICROSD_SPI_TEST_WIRING.md`.
+- Hardware status: **UNTESTED**. No wiring, card mount, WAV enumeration, or PSRAM copy result is claimed yet.

@@ -22,3 +22,7 @@ Current test configuration:
 - a running count of distinct pressed keys, plus commands to list missing keys or print the complete map.
 
 The user confirmed press and release events for all 128 keys through the CD74HC4067 on 2026-10-02, exact physical mapping, working multiple presses, and normal mux temperature after correcting reversed VCC/GND. See `docs/12_TEST_LOG_AND_MILESTONES.md`.
+
+## Next diagnostic sketch
+
+`VortexSDTest/` is a separate **COMPILED** microSD SPI/WAV/PSRAM test. The user's photographed breakout is labeled `3V3` and has six identified pads. See its README and `docs/20_MICROSD_SPI_TEST_WIRING.md` for the temporary wiring and generated test WAV.

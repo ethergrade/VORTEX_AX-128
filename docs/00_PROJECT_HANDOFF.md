@@ -28,6 +28,8 @@ This repository is the authoritative project baseline. It consolidates the previ
 16. `docs/16_LONG_REVERB_ENGINE.md`
 17. `docs/17_FIRMWARE_PROJECT_STRUCTURE.md`
 18. `docs/18_EK128_J1_PIN_BY_PIN_WIRING.md`
+19. `docs/19_ESP32_AUDIO_MIXER_CONTROL_RESEARCH.md`
+20. `docs/20_MICROSD_SPI_TEST_WIRING.md`
 
 ## Current project status
 

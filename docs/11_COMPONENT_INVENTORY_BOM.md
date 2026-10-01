@@ -14,9 +14,12 @@
 ### Multiplexer
 - CD74HC4067 16-channel analog multiplexer module
 
+## Reported on hand; exact board not yet identified
+
+- microSD SPI module and microSD card (user report on 2026-10-02); module photos show a six-pad breakout labeled `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`; hardware test pending
+
 ## Selected / planned
 
-- microSD SPI module
 - PCM5102A I2S DAC ×2 target
 - TDA1308 headphone amplifier
 - 3.5" 480×320 ST7796 display ×2
