@@ -26,6 +26,8 @@ These four GPIOs are exposed on the documented Freenove board and do not overlap
 5. Open Serial Monitor on the current `/dev/cu.usbmodem...` USB-to-UART port at 115200 baud, then press `RST` once. Keep `USB CDC On Boot` disabled so `Serial` maps to UART0, which is connected to this port. The SD sketch drives the display's `LCD_CS` (`GPIO1`) high so the display does not contend for the shared SPI bus.
 6. Look for card capacity, one compatible PCM16 WAV, and `PSRAM OK` with checksum `49EA2D8F` for the supplied test WAV. Save the serial output for the test log.
 
+For the current persistent mount failure, temporarily change `Tools > Core Debug Level` to `Verbose`, then recompile and upload the same sketch. Capture all serial output: Arduino-ESP32 3.3.12 logs the SD driver's failing command at verbose debug level. The FAT volume label and WAV folder are checked only after `SD.begin` succeeds; they cannot cause a mount failure at this stage.
+
 This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If it prints `microSD non montata`, recheck the six labeled connections with USB power disconnected, ensure the breakout's `3V3` and `GND` are not reversed, verify `CS=GPIO21`, `MOSI=GPIO14`, `CLK=GPIO12`, `MISO=GPIO13`, and confirm the card is inserted and FAT-formatted. Do not change the SPI pin assignments until the wiring is checked.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.
