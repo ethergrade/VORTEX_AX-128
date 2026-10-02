@@ -182,3 +182,9 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The red power rails are selected independently by `VC1`/`VC2` jumpers (5V0 or 3V3). For the display's VCC lead, the selected rail must be set to 5V0; the red pin is positive and black is GND. The DC jack is 5.5 x 2.1 mm per the Freenove manual; verify adapter polarity against the manual/adapter markings.
 - Freenove advises isolating the positive 5 V link between the development board and breakout when both USB and external DC are connected. For the simple standalone power test, upload over USB first, unplug USB, then power through the DC jack.
 - Display hardware status: **WORKING (user reported)**. The external microSD remains paused.
+
+## 2026-10-02 — display microSD as media storage proposed
+
+- The user asked whether the card inserted into the display can be used as the sample/data repository and as the firmware boot source.
+- The standard ESP32-S3 boot chain loads the application from the module's SPI flash; the display's microSD slot can instead be mounted by the running firmware after boot and used for WAV samples, presets, UI assets, and logs.
+- Next isolated hardware test: insert the FAT32 card into the display's onboard slot and connect the display's printed `SD_CS` to GPIO21. The existing `VortexSDTest` uses GPIO21 for card CS and holds `LCD_CS` GPIO1 inactive. This integrated slot has not yet been tested; the separate SD breakout's CMD0 failure does not determine its result.

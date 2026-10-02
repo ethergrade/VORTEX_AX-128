@@ -45,6 +45,12 @@ Risultato: 1 WAV, 1 PCM16 compatibili, PSRAM OK.
 
 The sketch compiles and its serial diagnostics have been observed through the connected USB-to-UART port. The microSD is not mounting yet; card detection and the physical SPI wiring still need correction and a successful bench test.
 
+## Alternative: use the display's microSD socket
+
+The now-working display has its own card socket. Leave the failed separate SD breakout disconnected. With power off, connect the display header pin labeled `SD_CS` to GPIO21; keep the display's existing SPI and power wires. `VortexSDTest.ino` already uses GPIO21 for card selection and keeps `LCD_CS` GPIO1 inactive. Create `/samples` on the FAT32 card and put the WAV there before this test. See [`docs/20_MICROSD_SPI_TEST_WIRING.md`](../../docs/20_MICROSD_SPI_TEST_WIRING.md).
+
+This slot is planned as the VORTEX media/data store after the firmware starts from internal ESP32-S3 flash. It is not the standard firmware boot source. The display's integrated reader has not yet passed a card test.
+
 ## No text in Serial Monitor
 
 The current `/dev/cu.usbmodem...` port is the board's USB-to-UART bridge, so `USB CDC On Boot` must be **Disabled** for `Serial` to use UART0 on that port. The sketch starts the one-shot diagnostic 1.5 seconds after reset. Open Serial Monitor at **115200 baud**, then press `RST` once. If the startup lines were missed, reset once more with the monitor open.

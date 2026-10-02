@@ -33,3 +33,13 @@ The observed verbose failure `Card Failed! cmd: 0x00` with `sdCommand(): no toke
 This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If it prints `microSD non montata`, recheck the six labeled connections with USB power disconnected, ensure the breakout's `3V3` and `GND` are not reversed, verify `CS=GPIO21`, `MOSI=GPIO14`, `CLK=GPIO12`, `MISO=GPIO13`, and confirm the card is inserted and FAT-formatted. Do not change the SPI pin assignments until the wiring is checked.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.
+
+## Alternative: card slot integrated into the display
+
+The display has its own microSD socket. For a test with the working LCD still wired, leave the separate six-pad breakout disconnected. With power disconnected, connect the display header pin labeled `SD_CS` (rear top pin in the supplied orientation; header pin 14) to **GPIO21**. Keep the display's existing SPI and power connections. The existing `VortexSDTest.ino` selects the card on GPIO21 and drives `LCD_CS = GPIO1` high, so the LCD stays deselected during the card test. GPIO21 is not used by the confirmed keyboard scanner map.
+
+Format the card FAT32 and create `/samples`; put the test WAV there. Then upload `firmware/VortexSDTest/` and inspect Serial Monitor for mount, WAV, and PSRAM results. This integrated slot has not yet been tested; the separate breakout's earlier CMD0 failure does not establish whether this reader works.
+
+## Intended role of the card in VORTEX
+
+The card is a removable data/media repository, not the standard firmware boot device. On reset, ESP32-S3's normal boot flow reads the application from the board's internal SPI flash ([Espressif startup flow](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-guides/startup.html)); after startup, firmware can mount the card as FAT storage ([ESP-IDF file-system support](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/api-guides/file-system-considerations.html)) and read WAV samples, presets, UI assets, and logs. Small critical settings can stay in NVS or have defaults so the instrument can still start if the card is absent. The current test expects `/samples`; future firmware can define additional folders after this card reader is validated.
