@@ -28,6 +28,8 @@ These four GPIOs are exposed on the documented Freenove board and do not overlap
 
 For the current persistent mount failure, temporarily change `Tools > Core Debug Level` to `Verbose`, then recompile and upload the same sketch. Capture all serial output: Arduino-ESP32 3.3.12 logs the SD driver's failing command at verbose debug level. `SD.begin` includes both card initialization over SPI and FAT filesystem mounting, so the error may arise in either stage. The volume label is not used by the sketch; the `/samples` directory and WAV are checked only after `SD.begin` succeeds.
 
+The observed verbose failure `Card Failed! cmd: 0x00` with `sdCommand(): no token received` means the card did not answer CMD0 during initial SPI communication. At this stage, verify the actual replacement module's pin labels, supply voltage, ground, CS, SCK, MOSI, MISO and solder continuity. This result occurs before FAT mounting; do not troubleshoot the WAV or `/samples` directory yet.
+
 This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If it prints `microSD non montata`, recheck the six labeled connections with USB power disconnected, ensure the breakout's `3V3` and `GND` are not reversed, verify `CS=GPIO21`, `MOSI=GPIO14`, `CLK=GPIO12`, `MISO=GPIO13`, and confirm the card is inserted and FAT-formatted. Do not change the SPI pin assignments until the wiring is checked.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.
