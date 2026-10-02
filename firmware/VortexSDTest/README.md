@@ -47,7 +47,7 @@ The software is ready to compile; card detection and the physical SPI wiring sti
 
 ## No text in Serial Monitor
 
-The sketch waits for a USB Serial Monitor connection before it runs the one-shot diagnostic. After uploading, select the current `/dev/cu.usbmodem...` port in Serial Monitor and set **115200 baud**. If the monitor is already open, press the ESP32-S3 `RST` button once. It is safe to close and reopen the monitor; a new connection runs the diagnostic again.
+The sketch starts the one-shot diagnostic 1.5 seconds after reset and does not wait on the CDC connection-state flag. Open Serial Monitor on the current `/dev/cu.usbmodem...` port at **115200 baud**, then press the ESP32-S3 `RST` button once. If the startup lines were missed, reset once more with the monitor open. The test prints card/WAV/PSRAM results as text; it does not play audio, so silence at the audio output is expected.
 
 This diagnostic reads the WAV and copies up to 64 KiB into PSRAM. **It does not play audio**, so silence at the audio output is expected during this test. Successful results appear as text in Serial Monitor.
 

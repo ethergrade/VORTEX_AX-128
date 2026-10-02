@@ -23,9 +23,9 @@ These four GPIOs are exposed on the documented Freenove board and do not overlap
 2. Wire each pad by its rear label and check the connections again, especially top `3V3` versus bottom `GND`.
 3. On the computer, place [`VORTEX_TEST_440HZ.wav`](../assets/test_samples/VORTEX_TEST_440HZ.wav) in `/samples` on a FAT-formatted microSD card. The sketch does not write to or format the card.
 4. Insert the card. In Arduino IDE select `ESP32S3 Dev Module`, `USB Mode: Hardware CDC and JTAG`, `USB CDC On Boot: Enabled`, `Flash Size: 16MB`, `Partition Scheme: 16M Flash (3MB APP / 9.9MB FATFS)`, `CPU Frequency: 240MHz`, `Flash Mode: QIO 80MHz`, `Upload Speed: 921600`, and `PSRAM: OPI PSRAM`; then upload `firmware/VortexSDTest/VortexSDTest.ino`. These values are also in `firmware/VortexSDTest/sketch.yaml` for Arduino CLI.
-5. Open Serial Monitor on the current `/dev/cu.usbmodem...` port at 115200 baud. The sketch waits for the Monitor connection before running the test; if it is already open, press `RST` once after upload.
+5. Open Serial Monitor on the current `/dev/cu.usbmodem...` port at 115200 baud, then press `RST` once. The sketch starts the diagnostic 1.5 seconds after reset without waiting for the CDC connection-state flag. If the startup lines were missed, reset once more with the Monitor open.
 6. Look for card capacity, one compatible PCM16 WAV, and `PSRAM OK` with checksum `49EA2D8F` for the supplied test WAV. Save the serial output for the test log.
 
-This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If the monitor stays empty, verify the full board configuration above, the current USB port and 115200 baud, then close/reopen the Monitor or press `RST`.
+This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If the monitor stays empty, verify the full board configuration above, select the current USB port at 115200 baud, and press `RST` while the Monitor is open.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.

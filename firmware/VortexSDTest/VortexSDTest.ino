@@ -231,18 +231,14 @@ void runTest() {
 
 void setup() {
   Serial.begin(115200);
+  // Give the USB Serial/JTAG monitor time to enumerate after reset. Do not
+  // gate diagnostics on operator bool(): on HW CDC that connection check can
+  // stay false until the host polls the endpoint, which would suppress the
+  // very first diagnostic output needed to establish the connection.
+  delay(1500);
+  runTest();
 }
 
 void loop() {
-  // Wait for the USB Serial Monitor before running the one-shot diagnostic.
-  // The IDE may disconnect/re-enumerate the USB CDC port during reset/upload;
-  // waiting here keeps the card/WAV results from being lost during that gap.
-  static bool wasConnected = false;
-  const bool isConnected = static_cast<bool>(Serial);
-  if (isConnected && !wasConnected) {
-    delay(250);
-    runTest();
-  }
-  wasConnected = isConnected;
-  delay(20);
+  delay(1000);
 }
