@@ -174,3 +174,11 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The user reports that the display still does not turn on. The Serial Monitor prints the LCD test banner, and the Verbose GPIO report maps GPIO47 as GPIO without the previous `IO 47 is not set as GPIO` error. There is not yet a user-confirmed image or backlight result.
 - This does not yet distinguish missing display power/backlight from a control/SPI wiring or controller issue. Before changing signals or power, establish whether the backlight glows and inspect a powered-off photo of the actual wiring against the printed pin labels; verify VCC and GND at the display header.
 - Firmware status: **COMPILED AND UPLOADED**. Display hardware status: **NO VISIBLE IMAGE REPORTED; CAUSE UNRESOLVED**. The external microSD diagnostic remains paused.
+
+## 2026-10-02 — display working; external-power question
+
+- The user now reports that the SPI display works.
+- Identified the pictured base as the Freenove ESP32/ESP32-S3 breakout v1.2; its silkscreen at the barrel jack says `Input: 7-12V`. A 9 V DC adapter is within that range and the board regulates the 5V0 rail.
+- The red power rails are selected independently by `VC1`/`VC2` jumpers (5V0 or 3V3). For the display's VCC lead, the selected rail must be set to 5V0; the red pin is positive and black is GND. The DC jack is 5.5 x 2.1 mm per the Freenove manual; verify adapter polarity against the manual/adapter markings.
+- Freenove advises isolating the positive 5 V link between the development board and breakout when both USB and external DC are connected. For the simple standalone power test, upload over USB first, unplug USB, then power through the DC jack.
+- Display hardware status: **WORKING (user reported)**. The external microSD remains paused.

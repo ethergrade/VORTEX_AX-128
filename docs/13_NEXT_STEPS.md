@@ -19,9 +19,9 @@ Validate:
 - WAV enumeration;
 - PSRAM loading.
 
-## Next — first SPI display test
+## Completed — first SPI display test (user reported 2026-10-02)
 
-Prepared firmware: `firmware/VortexDisplayTest/` (**COMPILED AND UPLOADED**). The sketchbook copy compiled at 338,580 program bytes / 22,824 global bytes and uploaded with flash verification. The user reports no visible image. The earlier GPIO47 initialization warning is fixed; the current Verbose GPIO map recognizes GPIO47. Before changing SPI wiring or controller code, identify whether the backlight glows, verify VCC/GND against the printed labels with power disconnected, and obtain a clear photo of the actual display-to-ESP32 wiring. Follow `docs/21_FIRST_SPI_DISPLAY_WIRING.md` only for the pictured matching module family: display VCC=5V, GND, `LCD_CS=GPIO1`, `LCD_RST=GPIO47`, `LCD_RS=GPIO38`, `SDI=GPIO14`, `SCK=GPIO12`, `SDO=GPIO13`; leave display `SD_CS`, `LED`, and all touch pins open. Keep the separate SD breakout disconnected for this isolated test. Expected result is RGB bands with a blinking white square. Resume microSD after recording a successful display result or a clear diagnosis.
+The user reports that the SPI display works. Its test sketch is `firmware/VortexDisplayTest/`; the GPIO47 initialization-order fix was compiled and uploaded successfully. For external display power, the pictured Freenove v1.2 breakout accepts 7–12 V DC at its barrel jack and regulates 5V0. Set the matching `VC1` or `VC2` jumper for the display's red supply rail to `5V0` (not `3V3`); red is positive, black is GND. See `docs/21_FIRST_SPI_DISPLAY_WIRING.md` for the power and USB/DC notes. The microSD diagnostic remains paused.
 
 ## Step 6 — first PCM5102A
 
