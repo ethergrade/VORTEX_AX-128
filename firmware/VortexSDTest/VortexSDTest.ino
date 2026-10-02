@@ -231,13 +231,18 @@ void runTest() {
 
 void setup() {
   Serial.begin(115200);
-  const uint32_t started = millis();
-  while (!Serial && millis() - started < 3000) {
-    delay(10);
-  }
-  runTest();
 }
 
 void loop() {
-  delay(1000);
+  // Wait for the USB Serial Monitor before running the one-shot diagnostic.
+  // The IDE may disconnect/re-enumerate the USB CDC port during reset/upload;
+  // waiting here keeps the card/WAV results from being lost during that gap.
+  static bool wasConnected = false;
+  const bool isConnected = static_cast<bool>(Serial);
+  if (isConnected && !wasConnected) {
+    delay(250);
+    runTest();
+  }
+  wasConnected = isConnected;
+  delay(20);
 }

@@ -47,6 +47,31 @@ The software is ready to compile; card detection and the physical SPI wiring sti
 
 ## No text in Serial Monitor
 
-Set `Tools > USB CDC On Boot > Enabled`, compile and upload again, select the same `/dev/cu.usbmodem...` port in Serial Monitor, set **115200 baud**, then press the ESP32-S3 `RST` button once. The build configuration from the first user upload recorded `CDCOnBoot=default` (disabled), which can leave this USB Serial Monitor without the sketch's `Serial` output.
+The sketch waits for a USB Serial Monitor connection before it runs the one-shot diagnostic. After uploading, select the current `/dev/cu.usbmodem...` port in Serial Monitor and set **115200 baud**. If the monitor is already open, press the ESP32-S3 `RST` button once. It is safe to close and reopen the monitor; a new connection runs the diagnostic again.
 
 This diagnostic reads the WAV and copies up to 64 KiB into PSRAM. **It does not play audio**, so silence at the audio output is expected during this test. Successful results appear as text in Serial Monitor.
+
+## Saved board configuration
+
+The checked-in [`sketch.yaml`](sketch.yaml) stores the complete default board identifier and menu options for Arduino CLI. With Arduino CLI, run this from the sketch folder to use the settings without typing them again:
+
+```sh
+arduino-cli compile .
+arduino-cli upload . --port /dev/cu.usbmodemXXXXXXXXXXXX
+```
+
+For Arduino IDE, select these values in the board/tool menus:
+
+| IDE setting | Value |
+|---|---|
+| Board | `ESP32S3 Dev Module` |
+| USB Mode | `Hardware CDC and JTAG` |
+| USB CDC On Boot | `Enabled` |
+| CPU Frequency | `240MHz (WiFi)` |
+| Flash Mode | `QIO 80MHz` |
+| Flash Size | `16MB` |
+| Partition Scheme | `16M Flash (3MB APP / 9.9MB FATFS)` |
+| PSRAM | `OPI PSRAM` |
+| Upload Speed | `921600` |
+
+Arduino IDE does not show this file as a custom profile menu; select the same values in its menus. The full board selection has also been recorded below so it stays with the project on GitHub. Use ESP32 core **3.3.12**.
