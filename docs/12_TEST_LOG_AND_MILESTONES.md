@@ -159,3 +159,10 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The manufacturer's schematic indicates that touch I²C pins may rise to the display's 5 V `VCC`; all `CTP_*` pins, `LED` and display-slot `SD_CS` are intentionally left disconnected in this first test.
 - Privacy-safe copies of the user's two microSD photos and display rear photo were added to the project assets after location metadata was removed and checked.
 - Firmware status: **COMPILED**. Hardware status: **UNTESTED**. The microSD diagnostic is also still awaiting its physical test.
+
+## 2026-10-02 — display test resumed
+
+- The user chose to pause microSD troubleshooting and test the SPI display first.
+- Opened the separate `VortexDisplayTest` sketch from the Arduino sketchbook copy and compiled it successfully with the current ESP32-S3 options: 338,580 program bytes and 22,824 global bytes. No upload or physical display result is claimed yet.
+- Next: with USB power disconnected, wire only display power and LCD SPI/control signals per `docs/21_FIRST_SPI_DISPLAY_WIRING.md`; leave touch and the display's own SD slot disconnected, and keep the external SD breakout out of this test. Upload the LCD sketch and report the screen pattern plus serial output.
+- Firmware status: **COMPILED**. Display hardware status: **UNTESTED**. The external microSD remains paused at the CMD0 no-response finding.

@@ -6,7 +6,7 @@ Active firmware: `firmware/VortexMatrixScanner/`
 
 The scanner is configured for eight rows and sixteen columns. The user confirmed press and release events for all 128 physical keys through the CD74HC4067, exact physical mapping, working multiple presses, and normal mux temperature after correcting reversed VCC/GND. See `docs/12_TEST_LOG_AND_MILESTONES.md` for the test record.
 
-## Next — microSD
+## Paused — microSD
 
 Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**; serial output confirmed through UART0). The card still reports `microSD non montata` after the user soldered a replacement SD module. The card is FAT32, named `VAULT`, with the WAV currently in its root. The sketch's `/samples` requirement applies only after mounting succeeds, so it does not explain this mount error. Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments.
 
@@ -19,9 +19,9 @@ Validate:
 - WAV enumeration;
 - PSRAM loading.
 
-## Prepared in parallel — first SPI display
+## Next — first SPI display test
 
-The user supplied the first display's rear pin labels. `firmware/VortexDisplayTest/` is a separate **COMPILED**, hardware-untested LCD smoke test. Use [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md) to connect only the LCD signals and power; touch and the display's microSD slot remain unused. Confirm the exact front model and photograph the colour-bar result, then record the serial output. This preparation does not change the primary microSD milestone or freeze the final display bus.
+Prepared firmware: `firmware/VortexDisplayTest/` (**COMPILED**). The user has switched to the display bench test; the sketch is open in Arduino IDE and compiled at 338,580 program bytes / 22,824 global bytes. Hardware remains **UNTESTED**. Follow `docs/21_FIRST_SPI_DISPLAY_WIRING.md`: disconnect USB while wiring; use display VCC=5V for the pictured module family, GND, `LCD_CS=GPIO1`, `LCD_RST=GPIO47`, `LCD_RS=GPIO38`, `SDI=GPIO14`, `SCK=GPIO12`, `SDO=GPIO13`; leave display `SD_CS`, `LED`, and all touch pins open. Keep the separate SD breakout disconnected for this isolated display test. Upload this sketch; expected result is RGB bands with a blinking white square. Resume microSD after recording the display result.
 
 ## Step 6 — first PCM5102A
 
