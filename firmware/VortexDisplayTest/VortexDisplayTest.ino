@@ -1,5 +1,5 @@
 // VORTEX AX-128: first SPI LCD smoke test for a likely ST7796 module.
-// Status: COMPILED, awaiting hardware confirmation.
+// Status: uploaded; no visible image reported, hardware debug in progress.
 // This separate sketch tests only the LCD. Touch and the LCD's SD slot stay disconnected.
 
 #include <Arduino.h>
@@ -134,14 +134,14 @@ void setup() {
   Serial.println("Touch and display SD slot are not used in this test.");
 
   // Keep the separate microSD breakout inactive if it is still wired.
-  digitalWrite(PIN_EXTERNAL_SD_CS, HIGH);
   pinMode(PIN_EXTERNAL_SD_CS, OUTPUT);
-  digitalWrite(PIN_LCD_CS, HIGH);
+  digitalWrite(PIN_EXTERNAL_SD_CS, HIGH);
   pinMode(PIN_LCD_CS, OUTPUT);
-  digitalWrite(PIN_LCD_RS, HIGH);
+  digitalWrite(PIN_LCD_CS, HIGH);
   pinMode(PIN_LCD_RS, OUTPUT);
-  digitalWrite(PIN_LCD_RST, HIGH);
+  digitalWrite(PIN_LCD_RS, HIGH);
   pinMode(PIN_LCD_RST, OUTPUT);
+  digitalWrite(PIN_LCD_RST, HIGH);
 
   SPI.begin(PIN_SCK, PIN_MISO, PIN_MOSI);
   lcdInit();

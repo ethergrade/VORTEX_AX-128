@@ -166,3 +166,11 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - Opened the separate `VortexDisplayTest` sketch from the Arduino sketchbook copy and compiled it successfully with the current ESP32-S3 options: 338,580 program bytes and 22,824 global bytes. No upload or physical display result is claimed yet.
 - Next: with USB power disconnected, wire only display power and LCD SPI/control signals per `docs/21_FIRST_SPI_DISPLAY_WIRING.md`; leave touch and the display's own SD slot disconnected, and keep the external SD breakout out of this test. Upload the LCD sketch and report the screen pattern plus serial output.
 - Firmware status: **COMPILED**. Display hardware status: **UNTESTED**. The external microSD remains paused at the CMD0 no-response finding.
+
+## 2026-10-02 — first display upload, no visible image reported
+
+- Corrected the LCD test's GPIO setup order: each CS/DC/reset output is now configured with `pinMode(..., OUTPUT)` before its first `digitalWrite`. This fixes the earlier GPIO47 warning.
+- The sketchbook copy compiled successfully (338,580 program bytes; 22,824 global bytes) and was uploaded to `/dev/cu.usbmodem5C630552291`; esptool verified the written flash hash and reset the ESP32-S3.
+- The user reports that the display still does not turn on. The Serial Monitor prints the LCD test banner, and the Verbose GPIO report maps GPIO47 as GPIO without the previous `IO 47 is not set as GPIO` error. There is not yet a user-confirmed image or backlight result.
+- This does not yet distinguish missing display power/backlight from a control/SPI wiring or controller issue. Before changing signals or power, establish whether the backlight glows and inspect a powered-off photo of the actual wiring against the printed pin labels; verify VCC and GND at the display header.
+- Firmware status: **COMPILED AND UPLOADED**. Display hardware status: **NO VISIBLE IMAGE REPORTED; CAUSE UNRESOLVED**. The external microSD diagnostic remains paused.
