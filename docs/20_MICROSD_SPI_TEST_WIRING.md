@@ -22,7 +22,9 @@ These four GPIOs are exposed on the documented Freenove board and do not overlap
 1. Disconnect USB power. Add a reliable header or soldered wires to the six module pads; do not rely on loose wires pressed into the holes.
 2. Wire each pad by its rear label and check the connections again, especially top `3V3` versus bottom `GND`.
 3. On the computer, place [`VORTEX_TEST_440HZ.wav`](../assets/test_samples/VORTEX_TEST_440HZ.wav) in `/samples` on a FAT-formatted microSD card. The sketch does not write to or format the card.
-4. Insert the card, power the ESP32-S3, upload `firmware/VortexSDTest/VortexSDTest.ino`, then open Serial Monitor at 115200 baud. Reset once if the startup lines were missed.
+4. Insert the card. In Arduino IDE set `Tools > USB CDC On Boot > Enabled`, then upload `firmware/VortexSDTest/VortexSDTest.ino`. Open Serial Monitor on the same `/dev/cu.usbmodem...` port at 115200 baud and press `RST` once if the startup output was missed.
 5. Look for card capacity, one compatible PCM16 WAV, and `PSRAM OK` with checksum `49EA2D8F` for the supplied test WAV. Save the serial output for the test log.
+
+This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If the monitor stays empty, first verify `USB CDC On Boot: Enabled`, the selected upload port, 115200 baud, and a reset after opening the monitor.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.

@@ -44,3 +44,9 @@ Risultato: 1 WAV, 1 PCM16 compatibili, PSRAM OK.
 `49EA2D8F` is the expected checksum for the first 65,536 audio bytes of the supplied test WAV. A different WAV will have a different checksum.
 
 The software is ready to compile; card detection and the physical SPI wiring still require a bench test.
+
+## No text in Serial Monitor
+
+Set `Tools > USB CDC On Boot > Enabled`, compile and upload again, select the same `/dev/cu.usbmodem...` port in Serial Monitor, set **115200 baud**, then press the ESP32-S3 `RST` button once. The build configuration from the first user upload recorded `CDCOnBoot=default` (disabled), which can leave this USB Serial Monitor without the sketch's `Serial` output.
+
+This diagnostic reads the WAV and copies up to 64 KiB into PSRAM. **It does not play audio**, so silence at the audio output is expected during this test. Successful results appear as text in Serial Monitor.

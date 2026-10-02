@@ -138,6 +138,7 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The sketch compiled for `ESP32S3 Dev Module` with the installed Arduino ESP32 core 3.3.12.
 - The user's module photos identify a six-pad breakout labeled `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Temporary signal assignments and the 3.3 V supply connection are recorded in `docs/20_MICROSD_SPI_TEST_WIRING.md`.
 - Hardware status: **UNTESTED**. No wiring, card mount, WAV enumeration, or PSRAM copy result is claimed yet.
+- The user later reported a successful upload followed by an empty output. The Arduino build metadata for that upload records `CDCOnBoot=default` (disabled), so the USB Serial Monitor was not configured to receive the sketch's `Serial` diagnostics. The user has not yet rerun with CDC enabled; card detection and WAV loading remain **UNTESTED**. No sound is expected because this diagnostic does not play the WAV.
 
 ## 2026-10-02 — first SPI display diagnostic prepared
 
