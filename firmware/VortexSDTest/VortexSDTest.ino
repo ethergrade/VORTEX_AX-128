@@ -7,13 +7,21 @@
 
 namespace {
 
+#define VORTEX_SD_SOURCE_DISPLAY_SLOT 1
+
 // Temporary SPI test pins on the Freenove ESP32-S3, not a frozen project pinout.
 // They do not overlap the EK-128 scanner GPIOs documented in docs/03.
 constexpr int kSckPin = 12;
 constexpr int kMisoPin = 13;
 constexpr int kMosiPin = 14;
-constexpr int kCsPin = 21;
 constexpr int kLcdCsPin = 1;
+#if VORTEX_SD_SOURCE_DISPLAY_SLOT
+constexpr int kCsPin = 47;
+constexpr int kLcdRstPin = 21;
+#else
+constexpr int kCsPin = 21;
+constexpr int kLcdRstPin = -1;
+#endif
 constexpr uint32_t kSpiHz = 4000000;
 constexpr size_t kMaxPsrLoadBytes = 64 * 1024;
 constexpr char kSampleDirectory[] = "/samples";
@@ -171,12 +179,20 @@ bool loadFragmentToPsram(File& file, const WavInfo& info) {
 void runTest() {
   Serial.println("VORTEX AX-128 - TEST microSD SPI / WAV / PSRAM");
   Serial.printf("SPI: SCK GPIO%d, MISO GPIO%d, MOSI GPIO%d, SD_CS GPIO%d; "
-                "LCD_CS GPIO%d disattivato\n",
+                "LCD_CS GPIO%d disattivato",
                 kSckPin, kMisoPin, kMosiPin, kCsPin, kLcdCsPin);
+  if (kLcdRstPin >= 0) {
+    Serial.printf("; LCD_RST GPIO%d mantenuto alto\n", kLcdRstPin);
+  } else {
+    Serial.println();
+  }
 
-  // The display shares SCK/MOSI/MISO. Keep it deselected during card access.
   pinMode(kLcdCsPin, OUTPUT);
   digitalWrite(kLcdCsPin, HIGH);
+  if (kLcdRstPin >= 0) {
+    pinMode(kLcdRstPin, OUTPUT);
+    digitalWrite(kLcdRstPin, HIGH);
+  }
   pinMode(kCsPin, OUTPUT);
   digitalWrite(kCsPin, HIGH);
   SPI.begin(kSckPin, kMisoPin, kMosiPin, kCsPin);

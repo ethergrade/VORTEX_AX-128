@@ -16,7 +16,7 @@ With the **rear as photographed**, the header is at left; the top pin is `SD_CS`
 
 | Rear top → bottom | Header pin | Display label | Freenove ESP32-S3, first test | Meaning |
 |---:|---:|---|---|---|
-| 1 | 14 | `SD_CS` | Leave open | Selects the display's *own* microSD slot; unused |
+| 1 | 14 | `SD_CS` | `GPIO47` | Selects the display's *own* microSD slot; held high during the LCD-only test |
 | 2 | 13 | `CTP_INT` | Leave open | Capacitive-touch interrupt; unused |
 | 3 | 12 | `CTP_SDA` | Leave open | Capacitive-touch I²C data; unused |
 | 4 | 11 | `CTP_RST` | Leave open | Capacitive-touch reset; unused |
@@ -26,21 +26,21 @@ With the **rear as photographed**, the header is at left; the top pin is `SD_CS`
 | 8 | 7 | `SCK` | `GPIO12` | Shared SPI clock |
 | 9 | 6 | `SDI(MOSI)` | `GPIO14` | Shared SPI data from ESP32 |
 | 10 | 5 | `LCD_RS` | `GPIO38` | Command/data selection (`DC`) |
-| 11 | 4 | `LCD_RST` | `GPIO47` | Display reset |
+| 11 | 4 | `LCD_RST` | `GPIO21` | Display reset |
 | 12 | 3 | `LCD_CS` | `GPIO1` | Display chip select, active low |
 | 13 | 2 | `GND` | `GND` | Common ground |
 | 14 | 1 | `VCC` | `5V` | Display-module power for matching 5 V board |
 
-These are **temporary bench GPIOs**. `GPIO12`/`13`/`14` deliberately match the external microSD diagnostic. That breakout keeps its separate `CS = GPIO21`; the display uses `LCD_CS = GPIO1`. [`VortexDisplayTest.ino`](../firmware/VortexDisplayTest/VortexDisplayTest.ino) sets GPIO21 high so an already-connected external microSD breakout remains inactive. Do not use the display's onboard card slot in this test, and do not connect its `SD_CS` to GPIO21.
+These are **temporary bench GPIOs**. The user confirmed the actual display reset wire is `GPIO21`; the display's own `SD_CS` uses `GPIO47`. The LCD test holds both chip-select lines high. The separate six-pin SD breakout remains disconnected while testing the display slot.
 
 With display `VCC = 5V`, the matching schematic pulls the external touch I²C lines up to `VCC`. **Do not attach `CTP_SCL` or `CTP_SDA` directly to 3.3 V ESP32 GPIOs in this configuration.** Touch needs a separately checked level-safe wiring plan. Leave all four `CTP_*` pins open now. The matching schematic says `LED` open leaves the backlight on; an unlit panel alone does not prove SPI is working.
 
 ## First test
 
-1. Leave the working EK-128/multiplexer wiring alone. With USB unplugged, connect the eight display wires shown above: `VCC`, `GND`, `LCD_CS`, `LCD_RST`, `LCD_RS`, `SDI`, `SCK`, and `SDO`. `LED`, touch and display-slot `SD_CS` remain open.
+1. Leave the working EK-128/multiplexer wiring alone. With USB unplugged, connect the display wires shown above: `VCC`, `GND`, `LCD_CS`, `LCD_RST`, `LCD_RS`, `SDI`, `SCK`, `SDO`, and `SD_CS`. `LED` and touch pins remain open.
 2. Recheck the *physical* top and bottom labels before powering the board; ensure `5V` goes only to display `VCC` and `3V3` only to the separate microSD module.
 3. In Arduino IDE open `VortexDisplayTest/VortexDisplayTest.ino`. Select `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and `USB CDC On Boot: Disabled` for the currently connected USB-to-UART port; upload this separate sketch.
 4. The panel should show red, green and blue vertical bands, a white upper edge, a black lower edge and a small white block blinking near the lower centre. Open Serial Monitor at 115200 baud for the corresponding startup lines.
 5. If the panel or ESP32 becomes hot, disconnect USB immediately and inspect power and ground. If the backlight is on but there is no pattern, verify `LCD_CS`, `LCD_RS`, `LCD_RST`, `SCK` and `SDI(MOSI)`; capture a photo and serial output before changing the controller assumption.
 
-The test sketch does not scan keys, mount either microSD slot, access touch, or draw the final GUI. Software status is **COMPILED AND UPLOADED**; the user reports that the display works.
+The test sketch does not scan keys, mount the microSD slot, access touch, or draw the final GUI. Software status is **COMPILED AND UPLOADED**; the user reports that the display works. The physical reset connection is `GPIO21`, and `GPIO47` is reserved for the display-slot `SD_CS`.

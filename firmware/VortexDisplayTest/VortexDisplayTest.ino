@@ -10,10 +10,10 @@
 constexpr uint8_t PIN_SCK = 12;
 constexpr uint8_t PIN_MISO = 13;
 constexpr uint8_t PIN_MOSI = 14;
-constexpr uint8_t PIN_EXTERNAL_SD_CS = 21;
+constexpr uint8_t PIN_DISPLAY_SD_CS = 47;
 constexpr uint8_t PIN_LCD_CS = 1;
 constexpr uint8_t PIN_LCD_RS = 38;  // DC: LOW = command, HIGH = data
-constexpr uint8_t PIN_LCD_RST = 47;
+constexpr uint8_t PIN_LCD_RST = 21;
 
 constexpr uint16_t LCD_WIDTH = 480;   // landscape; native panel is 320 x 480
 constexpr uint16_t LCD_HEIGHT = 320;
@@ -133,9 +133,9 @@ void setup() {
   Serial.println("VORTEX LCD TEST: ST7796 candidate, 480x320 landscape");
   Serial.println("Touch and display SD slot are not used in this test.");
 
-  // Keep the separate microSD breakout inactive if it is still wired.
-  pinMode(PIN_EXTERNAL_SD_CS, OUTPUT);
-  digitalWrite(PIN_EXTERNAL_SD_CS, HIGH);
+  // Keep the display's own microSD slot deselected during the LCD test.
+  pinMode(PIN_DISPLAY_SD_CS, OUTPUT);
+  digitalWrite(PIN_DISPLAY_SD_CS, HIGH);
   pinMode(PIN_LCD_CS, OUTPUT);
   digitalWrite(PIN_LCD_CS, HIGH);
   pinMode(PIN_LCD_RS, OUTPUT);

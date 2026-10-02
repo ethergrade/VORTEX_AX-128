@@ -1,10 +1,10 @@
 # 20 — microSD SPI test wiring
 
-This wiring applies to the user's photographed six-pin microSD breakout and the separate `firmware/VortexSDTest/` sketch. It is a **temporary bench assignment**, not a frozen final PCB pinout. The first test attempt did not mount the card; verify the labeled power and SPI wires and FAT format before proceeding.
+This document covers both the user's photographed six-pin microSD breakout and the now-working display's built-in microSD slot. The `firmware/VortexSDTest/` sketch defaults to the built-in display slot; `VORTEX_SD_SOURCE_DISPLAY_SLOT=0` selects the separate breakout. These are **temporary bench assignments**, not frozen final PCB pinouts. The external breakout previously failed at CMD0; the display slot has not been tested yet.
 
 The module's rear silkscreen identifies its pads. With the **rear side facing you, socket on the left, and six pads on the right**, they run **top to bottom** as `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Use the printed labels as the authority if the module is rotated.
 
-Privacy-safe copies of the user's two module photos are in [`assets/Modules/`](../assets/Modules/). The separate first-display smoke test reuses `GPIO12`/`13`/`14` for SPI but assigns the display its own `LCD_CS = GPIO1`; see [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md). The display module's supply is different from this breakout's `3V3` supply.
+Privacy-safe copies of the user's two external-module photos are in [`assets/Modules/`](../assets/Modules/). The display pin map, including the user's confirmed `LCD_RST = GPIO21`, is in [`21_FIRST_SPI_DISPLAY_WIRING.md`](21_FIRST_SPI_DISPLAY_WIRING.md).
 
 | Module pad | Freenove ESP32-S3 | Purpose |
 |---|---|---|
@@ -15,15 +15,15 @@ Privacy-safe copies of the user's two module photos are in [`assets/Modules/`](.
 | `MISO` | `GPIO13` | Data from card to ESP32 |
 | `GND` (bottom pad) | `GND` | Common ground |
 
-These four GPIOs are exposed on the documented Freenove board and do not overlap the EK-128 scanner's existing GPIOs. The keyboard scanner sketch is left intact; `VortexSDTest` is uploaded separately for this bench test. The photographed breakout is marked `3V3`; no 5 V supply connection is part of this test.
+The external-breakout assignments above apply only when that breakout is used with the display disconnected. Set `VORTEX_SD_SOURCE_DISPLAY_SLOT` to `0` in `VortexSDTest.ino` for this mode. The photographed breakout is marked `3V3`; no 5 V supply connection is part of this test.
 
-## Test sequence
+## Test sequence: separate six-pin breakout
 
 1. Disconnect USB power. Add a reliable header or soldered wires to the six module pads; do not rely on loose wires pressed into the holes.
 2. Wire each pad by its rear label and check the connections again, especially top `3V3` versus bottom `GND`.
 3. On the computer, place [`VORTEX_TEST_440HZ.wav`](../assets/test_samples/VORTEX_TEST_440HZ.wav) in `/samples` on a FAT-formatted microSD card. The sketch does not write to or format the card.
-4. Insert the card. In Arduino IDE select `ESP32S3 Dev Module`, `USB Mode: Hardware CDC and JTAG`, `USB CDC On Boot: Disabled`, `Flash Size: 16MB`, `Partition Scheme: 16M Flash (3MB APP / 9.9MB FATFS)`, `CPU Frequency: 240MHz`, `Flash Mode: QIO 80MHz`, `Upload Speed: 921600`, and `PSRAM: OPI PSRAM`; then upload `firmware/VortexSDTest/VortexSDTest.ino`. These values are also in `firmware/VortexSDTest/sketch.yaml` for Arduino CLI.
-5. Open Serial Monitor on the current `/dev/cu.usbmodem...` USB-to-UART port at 115200 baud, then press `RST` once. Keep `USB CDC On Boot` disabled so `Serial` maps to UART0, which is connected to this port. The SD sketch drives the display's `LCD_CS` (`GPIO1`) high so the display does not contend for the shared SPI bus.
+4. Insert the card. In Arduino IDE select `ESP32S3 Dev Module`, `USB Mode: Hardware CDC and JTAG`, `USB CDC On Boot: Disabled`, `Flash Size: 16MB`, `Partition Scheme: 16M Flash (3MB APP / 9.9MB FATFS)`, `CPU Frequency: 240MHz`, `Flash Mode: QIO 80MHz`, `Upload Speed: 921600`, and `PSRAM: OPI PSRAM`; then upload `firmware/VortexSDTest/VortexSDTest.ino`. Set `VORTEX_SD_SOURCE_DISPLAY_SLOT=0` first for this external-breakout mode. These values are also in `firmware/VortexSDTest/sketch.yaml` for Arduino CLI.
+5. Open Serial Monitor on the current `/dev/cu.usbmodem...` USB-to-UART port at 115200 baud, then press `RST` once. Keep `USB CDC On Boot` disabled so `Serial` maps to UART0, which is connected to this port. This mode assumes the display is disconnected.
 6. Look for card capacity, one compatible PCM16 WAV, and `PSRAM OK` with checksum `49EA2D8F` for the supplied test WAV. Save the serial output for the test log.
 
 For the current persistent mount failure, temporarily change `Tools > Core Debug Level` to `Verbose`, then recompile and upload the same sketch. Capture all serial output: Arduino-ESP32 3.3.12 logs the SD driver's failing command at verbose debug level. `SD.begin` includes both card initialization over SPI and FAT filesystem mounting, so the error may arise in either stage. The volume label is not used by the sketch; the `/samples` directory and WAV are checked only after `SD.begin` succeeds.
@@ -36,9 +36,9 @@ If the breakout becomes hot or card mounting fails, disconnect power and inspect
 
 ## Alternative: card slot integrated into the display
 
-The display has its own microSD socket. For a test with the working LCD still wired, leave the separate six-pad breakout disconnected. With power disconnected, connect the display header pin labeled `SD_CS` (rear top pin in the supplied orientation; header pin 14) to **GPIO21**. Keep the display's existing SPI and power connections. The existing `VortexSDTest.ino` selects the card on GPIO21 and drives `LCD_CS = GPIO1` high, so the LCD stays deselected during the card test. GPIO21 is not used by the confirmed keyboard scanner map.
+The display has its own microSD socket. For a test with the working LCD still wired, leave the separate six-pad breakout disconnected. With power disconnected, connect the display header pin labeled `SD_CS` (rear top pin in the supplied orientation; header pin 14) to **GPIO47**. The user confirmed that `LCD_RST` is wired to **GPIO21**, so the integrated-slot mode holds GPIO21 high and selects the card on GPIO47. The test also drives `LCD_CS = GPIO1` high. Neither GPIO21 nor GPIO47 is used by the confirmed keyboard scanner map.
 
-Format the card FAT32 and create `/samples`; put the test WAV there. Then upload `firmware/VortexSDTest/` and inspect Serial Monitor for mount, WAV, and PSRAM results. This integrated slot has not yet been tested; the separate breakout's earlier CMD0 failure does not establish whether this reader works.
+Leave `VORTEX_SD_SOURCE_DISPLAY_SLOT` at `1` (the default), format the card FAT32 and create `/samples`; put the test WAV there. Then upload `firmware/VortexSDTest/` and inspect Serial Monitor for mount, WAV, and PSRAM results. This integrated slot has not yet been tested; the separate breakout's earlier CMD0 failure does not establish whether this reader works.
 
 ## Intended role of the card in VORTEX
 

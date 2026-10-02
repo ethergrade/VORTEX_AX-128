@@ -6,18 +6,18 @@
 
 The user's module photos show a six-pad SPI breakout with a rear `3V3` supply label. Use **ESP32 `3V3`**, never `5V`, for this board. With the rear facing you, socket left and pads right, the labels are top-to-bottom: `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Check the actual rear labels before wiring. The full table is in [`docs/20_MICROSD_SPI_TEST_WIRING.md`](../../docs/20_MICROSD_SPI_TEST_WIRING.md).
 
-The sketch proposes these **temporary test signal pins** on the Freenove ESP32-S3; they do not overlap the keyboard scanner pins and are not frozen for the final PCB:
+The sketch defaults to the display-integrated card slot. `VORTEX_SD_SOURCE_DISPLAY_SLOT` selects that slot (`1`: SD_CS=GPIO47 and hold the user's LCD_RST GPIO21 high) or the separate six-pad breakout (`0`: CS=GPIO21, with display disconnected). These **temporary test signal pins** are not frozen for the final PCB:
 
 | Module pad | ESP32-S3 test connection |
 |---|---|
 | 3V3 | 3V3 |
-| CS | GPIO21 |
+| CS | GPIO21 (external-breakout mode only) |
 | MOSI | GPIO14 |
 | CLK | GPIO12 |
 | MISO | GPIO13 |
 | GND | GND |
 
-Change the four signal-pin constants at the top of `VortexSDTest.ino` if the temporary pin choice must change.
+GPIO21 and GPIO47 are not used by the confirmed keyboard scanner map.
 
 ## Prepare the card
 
@@ -26,10 +26,10 @@ Use a card with a FAT filesystem. On the computer, create `/samples` and copy [`
 ## Run
 
 1. Open `VortexSDTest.ino` in Arduino IDE. Select `ESP32S3 Dev Module`, 16 MB flash, OPI 8 MB PSRAM, and `USB CDC On Boot: Disabled` for the currently connected USB-to-UART port.
-2. With USB disconnected, make the six connections exactly as labeled on the module, check them, then upload this separate test sketch.
+2. For the display slot, connect its `SD_CS` to GPIO47 and leave `VORTEX_SD_SOURCE_DISPLAY_SLOT` at `1`. For the separate six-pad breakout, disconnect the display, set the switch to `0`, and wire the labels as shown above. Upload this test sketch.
 3. Open Serial Monitor at 115200 baud and reset the ESP32-S3 if the initial messages were missed.
 
-The sketch mounts the card at 4 MHz SPI, holds the display's `LCD_CS` (`GPIO1`) high, reports capacity, lists `.wav` files in `/samples`, checks RIFF/WAVE PCM16 mono/stereo headers, and copies up to 64 KiB of the first compatible file's audio data to PSRAM. A checksum is printed to show the bytes were read. The scan is read-only and does not play audio.
+The sketch mounts the card at 4 MHz SPI, holds the display's `LCD_CS` (`GPIO1`) high, reports capacity, lists `.wav` files in `/samples`, checks RIFF/WAVE PCM16 mono/stereo headers, and copies up to 64 KiB of the first compatible file's audio data to PSRAM. In integrated-slot mode it also holds the user's `LCD_RST` (GPIO21) high. A checksum is printed to show the bytes were read. The scan is read-only and does not play audio.
 
 Expected successful lines include:
 
@@ -47,7 +47,7 @@ The sketch compiles and its serial diagnostics have been observed through the co
 
 ## Alternative: use the display's microSD socket
 
-The now-working display has its own card socket. Leave the failed separate SD breakout disconnected. With power off, connect the display header pin labeled `SD_CS` to GPIO21; keep the display's existing SPI and power wires. `VortexSDTest.ino` already uses GPIO21 for card selection and keeps `LCD_CS` GPIO1 inactive. Create `/samples` on the FAT32 card and put the WAV there before this test. See [`docs/20_MICROSD_SPI_TEST_WIRING.md`](../../docs/20_MICROSD_SPI_TEST_WIRING.md).
+The now-working display has its own card socket. Leave the failed separate SD breakout disconnected. With power off, connect the display header pin labeled `SD_CS` to GPIO47; the user has `LCD_RST` wired to GPIO21. Keep the display's existing SPI and power wires. `VortexSDTest.ino` defaults to this mode and keeps `LCD_CS` GPIO1 inactive. Create `/samples` on the FAT32 card and put the WAV there before this test. See [`docs/20_MICROSD_SPI_TEST_WIRING.md`](../../docs/20_MICROSD_SPI_TEST_WIRING.md).
 
 This slot is planned as the VORTEX media/data store after the firmware starts from internal ESP32-S3 flash. It is not the standard firmware boot source. The display's integrated reader has not yet passed a card test.
 

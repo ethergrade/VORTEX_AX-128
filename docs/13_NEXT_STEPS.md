@@ -8,11 +8,11 @@ The scanner is configured for eight rows and sixteen columns. The user confirmed
 
 ## Next — test the display's integrated microSD slot
 
-The separate six-pin SD breakout failed at CMD0, so try the card reader integrated into the now-working display. Insert the FAT32 card and, with power disconnected, connect the display's printed `SD_CS` pin to GPIO21. The existing `firmware/VortexSDTest/` test already uses GPIO21 for SD chip select and holds `LCD_CS` GPIO1 inactive; its current WAV scan expects `/samples`, so place the test WAV there. Leave the separate SD breakout disconnected. Wiring details are in `docs/20_MICROSD_SPI_TEST_WIRING.md`.
+The separate six-pin SD breakout failed at CMD0, so try the card reader integrated into the now-working display. The user confirmed `LCD_RST` is already wired to GPIO21; do not connect `SD_CS` there. With power disconnected, connect display `SD_CS` to GPIO47. `VortexSDTest` now defaults to this assignment and holds `LCD_RST` GPIO21 high and `LCD_CS` GPIO1 inactive. Its WAV scan expects `/samples`, so place the test WAV there. Leave the separate SD breakout disconnected. Wiring details are in `docs/20_MICROSD_SPI_TEST_WIRING.md`.
 
 The SD card can be the media/data repository after firmware startup: WAV samples, presets, UI assets, and logs. The normal ESP32-S3 bootloader loads the application from the board's internal SPI flash; the running app then mounts the SD card. See `docs/20_MICROSD_SPI_TEST_WIRING.md` for this distinction.
 
-The user tested with the display disconnected. Arduino IDE Verbose diagnostics now show repeated `sdCommand(): no token received` and `Card Failed! cmd: 0x00` (CMD0). This is a card-response failure during SPI initialization, before FAT mounting or WAV discovery. The core reports the intended pin assignment (SCK=GPIO12, MISO=GPIO13, MOSI=GPIO14, SD_SS=GPIO21); this does not prove physical continuity or power. Next request one clear photo of the replacement module's front/back labels and its wires to the ESP32. Confirm the replacement module's supply requirement from its own silkscreen before applying power; do not assume the old module's pin order or 3.3 V wiring applies.
+Historical external-breakout diagnostic: with the display disconnected, Arduino IDE Verbose output showed repeated `sdCommand(): no token received` and `Card Failed! cmd: 0x00` (CMD0), before FAT mounting or WAV discovery. That breakout test used `SD_CS = GPIO21`; this mapping is only for the separate breakout with the display disconnected. It does not apply to the current display-slot test, where `LCD_RST = GPIO21` and `SD_CS = GPIO47`.
 
 Validate:
 

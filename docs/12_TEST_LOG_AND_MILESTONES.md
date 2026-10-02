@@ -188,3 +188,9 @@ Firmware status for this reported scope: **TESTED**. The keyboard milestone is c
 - The user asked whether the card inserted into the display can be used as the sample/data repository and as the firmware boot source.
 - The standard ESP32-S3 boot chain loads the application from the module's SPI flash; the display's microSD slot can instead be mounted by the running firmware after boot and used for WAV samples, presets, UI assets, and logs.
 - Next isolated hardware test: insert the FAT32 card into the display's onboard slot and connect the display's printed `SD_CS` to GPIO21. The existing `VortexSDTest` uses GPIO21 for card CS and holds `LCD_CS` GPIO1 inactive. This integrated slot has not yet been tested; the separate SD breakout's CMD0 failure does not determine its result.
+
+## 2026-10-02 — corrected display microSD chip-select wiring
+
+- The user clarified that the display's `LCD_RST` wire is already connected to GPIO21. The earlier proposal to connect the display-slot `SD_CS` to GPIO21 was wrong and would put two display signals on the same ESP32 pin.
+- Corrected the temporary bench mapping: keep `LCD_RST = GPIO21`; connect the display-slot `SD_CS = GPIO47`. Updated both test sketches, their READMEs, and the display/microSD wiring guides. `VortexSDTest` keeps the LCD reset high and `LCD_CS` inactive while probing the integrated card slot.
+- The integrated display slot has not yet been wired/tested with this corrected mapping. Do not upload/run the integrated-slot test until `SD_CS` is wired to GPIO47 with power disconnected; leave the separate six-pin breakout disconnected.
