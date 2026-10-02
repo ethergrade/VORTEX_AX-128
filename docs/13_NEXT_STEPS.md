@@ -10,7 +10,7 @@ The scanner is configured for eight rows and sixteen columns. The user confirmed
 
 Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**; serial output confirmed through UART0). The card still reports `microSD non montata` after the user soldered a replacement SD module. The card is FAT32, named `VAULT`, with the WAV currently in its root. The sketch's `/samples` requirement applies only after mounting succeeds, so it does not explain this mount error. Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments.
 
-The user tested with the display disconnected and still got `microSD non montata`. Next, temporarily set Arduino IDE `Tools > Core Debug Level > Verbose`, recompile/upload the same sketch, and capture all serial messages; this exposes SD-driver command failures. Also capture a clear photo of the replacement module showing its pin labels and wires. Do not change GPIO assignments until the replacement module's pinout and driver output are confirmed.
+The user tested with the display disconnected and still got `microSD non montata`. A screenshot confirms Arduino IDE has `Core Debug Level: Verbose` selected, but the reported capture has no SD-driver messages and does not confirm a new upload. Press **Upload** with Verbose selected (a reset alone does not recompile), then capture the full serial output. If a confirmed fresh upload still emits no driver diagnostics, add an explicit raw SPI probe. Also capture a clear photo of the replacement module showing its pin labels and wires. Do not change GPIO assignments until the replacement module's pinout and driver output are confirmed.
 
 Validate:
 
