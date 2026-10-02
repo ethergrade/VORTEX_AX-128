@@ -37,7 +37,7 @@ With display `VCC = 5V`, the matching schematic pulls the external touch I²C li
 
 1. Leave the working EK-128/multiplexer wiring alone. With USB unplugged, connect the eight display wires shown above: `VCC`, `GND`, `LCD_CS`, `LCD_RST`, `LCD_RS`, `SDI`, `SCK`, and `SDO`. `LED`, touch and display-slot `SD_CS` remain open.
 2. Recheck the *physical* top and bottom labels before powering the board; ensure `5V` goes only to display `VCC` and `3V3` only to the separate microSD module.
-3. In Arduino IDE open `VortexDisplayTest/VortexDisplayTest.ino`. Select `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and `USB CDC On Boot: Enabled`; upload this separate sketch.
+3. In Arduino IDE open `VortexDisplayTest/VortexDisplayTest.ino`. Select `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and `USB CDC On Boot: Disabled` for the currently connected USB-to-UART port; upload this separate sketch.
 4. The panel should show red, green and blue vertical bands, a white upper edge, a black lower edge and a small white block blinking near the lower centre. Open Serial Monitor at 115200 baud for the corresponding startup lines.
 5. If the panel or ESP32 becomes hot, disconnect USB immediately and inspect power and ground. If the backlight is on but there is no pattern, verify `LCD_CS`, `LCD_RS`, `LCD_RST`, `SCK` and `SDI(MOSI)`; capture a photo and serial output before changing the controller assumption.
 

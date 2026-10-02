@@ -1,6 +1,6 @@
 # 20 — microSD SPI test wiring
 
-This wiring applies to the user's photographed six-pin microSD breakout and the separate `firmware/VortexSDTest/` sketch. It is a **temporary bench assignment**, not a frozen final PCB pinout. The breakout and card have not yet been tested electrically.
+This wiring applies to the user's photographed six-pin microSD breakout and the separate `firmware/VortexSDTest/` sketch. It is a **temporary bench assignment**, not a frozen final PCB pinout. The first test attempt did not mount the card; verify the labeled power and SPI wires and FAT format before proceeding.
 
 The module's rear silkscreen identifies its pads. With the **rear side facing you, socket on the left, and six pads on the right**, they run **top to bottom** as `3V3`, `CS`, `MOSI`, `CLK`, `MISO`, `GND`. Use the printed labels as the authority if the module is rotated.
 
@@ -22,10 +22,10 @@ These four GPIOs are exposed on the documented Freenove board and do not overlap
 1. Disconnect USB power. Add a reliable header or soldered wires to the six module pads; do not rely on loose wires pressed into the holes.
 2. Wire each pad by its rear label and check the connections again, especially top `3V3` versus bottom `GND`.
 3. On the computer, place [`VORTEX_TEST_440HZ.wav`](../assets/test_samples/VORTEX_TEST_440HZ.wav) in `/samples` on a FAT-formatted microSD card. The sketch does not write to or format the card.
-4. Insert the card. In Arduino IDE select `ESP32S3 Dev Module`, `USB Mode: Hardware CDC and JTAG`, `USB CDC On Boot: Enabled`, `Flash Size: 16MB`, `Partition Scheme: 16M Flash (3MB APP / 9.9MB FATFS)`, `CPU Frequency: 240MHz`, `Flash Mode: QIO 80MHz`, `Upload Speed: 921600`, and `PSRAM: OPI PSRAM`; then upload `firmware/VortexSDTest/VortexSDTest.ino`. These values are also in `firmware/VortexSDTest/sketch.yaml` for Arduino CLI.
-5. Open Serial Monitor on the current `/dev/cu.usbmodem...` port at 115200 baud, then press `RST` once. The sketch starts the diagnostic 1.5 seconds after reset without waiting for the CDC connection-state flag. If the startup lines were missed, reset once more with the Monitor open.
+4. Insert the card. In Arduino IDE select `ESP32S3 Dev Module`, `USB Mode: Hardware CDC and JTAG`, `USB CDC On Boot: Disabled`, `Flash Size: 16MB`, `Partition Scheme: 16M Flash (3MB APP / 9.9MB FATFS)`, `CPU Frequency: 240MHz`, `Flash Mode: QIO 80MHz`, `Upload Speed: 921600`, and `PSRAM: OPI PSRAM`; then upload `firmware/VortexSDTest/VortexSDTest.ino`. These values are also in `firmware/VortexSDTest/sketch.yaml` for Arduino CLI.
+5. Open Serial Monitor on the current `/dev/cu.usbmodem...` USB-to-UART port at 115200 baud, then press `RST` once. Keep `USB CDC On Boot` disabled so `Serial` maps to UART0, which is connected to this port. The SD sketch drives the display's `LCD_CS` (`GPIO1`) high so the display does not contend for the shared SPI bus.
 6. Look for card capacity, one compatible PCM16 WAV, and `PSRAM OK` with checksum `49EA2D8F` for the supplied test WAV. Save the serial output for the test log.
 
-This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If the monitor stays empty, verify the full board configuration above, select the current USB port at 115200 baud, and press `RST` while the Monitor is open.
+This diagnostic does not play the WAV; this step has no audio output. Its results are printed only in Serial Monitor. If it prints `microSD non montata`, recheck the six labeled connections with USB power disconnected, ensure the breakout's `3V3` and `GND` are not reversed, verify `CS=GPIO21`, `MOSI=GPIO14`, `CLK=GPIO12`, `MISO=GPIO13`, and confirm the card is inserted and FAT-formatted. Do not change the SPI pin assignments until the wiring is checked.
 
 If the breakout becomes hot or card mounting fails, disconnect power and inspect the pad order and wiring before changing code.

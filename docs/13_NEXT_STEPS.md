@@ -8,7 +8,7 @@ The scanner is configured for eight rows and sixteen columns. The user confirmed
 
 ## Next — microSD
 
-Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**, hardware untested). Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments.
+Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**; serial output confirmed through UART0). The first card attempt reports `microSD non montata`. Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments. The sketch keeps the shared display chip select inactive during the SD test.
 
 Validate:
 

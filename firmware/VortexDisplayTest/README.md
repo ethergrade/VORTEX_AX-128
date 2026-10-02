@@ -17,6 +17,6 @@ Use the full photo-backed wiring and power notes in [`docs/21_FIRST_SPI_DISPLAY_
 
 Leave `LED`, the four `CTP_*` touch pins and the display-slot `SD_CS` disconnected. The LCD test uses the same SPI wires as the external microSD breakout but a separate chip-select. It drives the breakout's `CS = GPIO21` high if that breakout is still attached.
 
-Open this folder as its own sketch in Arduino IDE. Select `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and `USB CDC On Boot: Enabled`. Upload, then view Serial Monitor at 115200 baud. The expected visual is red/green/blue vertical bands, a white top edge, a black bottom edge, and a blinking white block near the bottom centre. Photograph the result and save the serial output for the test log.
+Open this folder as its own sketch in Arduino IDE. Select `ESP32S3 Dev Module`, 16 MB flash, OPI PSRAM and `USB CDC On Boot: Disabled` for the currently connected USB-to-UART port. Upload, then view Serial Monitor at 115200 baud. The expected visual is red/green/blue vertical bands, a white top edge, a black bottom edge, and a blinking white block near the bottom centre. Photograph the result and save the serial output for the test log.
 
 The sketch uses only the installed Arduino ESP32 core (`SPI.h`); it needs no display library. The raw ST7796 initialization follows the [LCDWiki MSP3525/MSP3526 reference](https://www.lcdwiki.com/res/MSP3525_MSP3526/ST7796_Init.txt). The exact module marking and controller are still to be confirmed from the front or successful test.

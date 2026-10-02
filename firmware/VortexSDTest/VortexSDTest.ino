@@ -13,6 +13,7 @@ constexpr int kSckPin = 12;
 constexpr int kMisoPin = 13;
 constexpr int kMosiPin = 14;
 constexpr int kCsPin = 21;
+constexpr int kLcdCsPin = 1;
 constexpr uint32_t kSpiHz = 4000000;
 constexpr size_t kMaxPsrLoadBytes = 64 * 1024;
 constexpr char kSampleDirectory[] = "/samples";
@@ -169,9 +170,13 @@ bool loadFragmentToPsram(File& file, const WavInfo& info) {
 
 void runTest() {
   Serial.println("VORTEX AX-128 - TEST microSD SPI / WAV / PSRAM");
-  Serial.printf("SPI: SCK GPIO%d, MISO GPIO%d, MOSI GPIO%d, CS GPIO%d\n",
-                kSckPin, kMisoPin, kMosiPin, kCsPin);
+  Serial.printf("SPI: SCK GPIO%d, MISO GPIO%d, MOSI GPIO%d, SD_CS GPIO%d; "
+                "LCD_CS GPIO%d disattivato\n",
+                kSckPin, kMisoPin, kMosiPin, kCsPin, kLcdCsPin);
 
+  // The display shares SCK/MOSI/MISO. Keep it deselected during card access.
+  pinMode(kLcdCsPin, OUTPUT);
+  digitalWrite(kLcdCsPin, HIGH);
   pinMode(kCsPin, OUTPUT);
   digitalWrite(kCsPin, HIGH);
   SPI.begin(kSckPin, kMisoPin, kMosiPin, kCsPin);
@@ -231,10 +236,7 @@ void runTest() {
 
 void setup() {
   Serial.begin(115200);
-  // Give the USB Serial/JTAG monitor time to enumerate after reset. Do not
-  // gate diagnostics on operator bool(): on HW CDC that connection check can
-  // stay false until the host polls the endpoint, which would suppress the
-  // very first diagnostic output needed to establish the connection.
+  // Give the USB-to-UART serial monitor time to reconnect after reset.
   delay(1500);
   runTest();
 }

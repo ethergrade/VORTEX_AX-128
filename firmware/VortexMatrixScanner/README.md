@@ -45,7 +45,7 @@ Press each physical key and compare its position with the printed coordinate and
 - CPU: 240 MHz
 - Flash: 16 MB
 - PSRAM: OPI 8 MB
-- USB CDC On Boot: Enabled
+- USB CDC On Boot: Disabled when using the current USB-to-UART bridge (`/dev/cu.usbmodem...`); this routes `Serial` to UART0.
 
 ## Bench result
 

@@ -19,8 +19,8 @@
   "active_firmware": "firmware/VortexMatrixScanner",
   "active_firmware_status": "TESTED",
   "prepared_diagnostics": {
-    "microSD": "firmware/VortexSDTest — COMPILED, hardware UNTESTED",
+    "microSD": "firmware/VortexSDTest — COMPILED; UART0 serial verified, card mount not yet successful",
     "first_display": "firmware/VortexDisplayTest — COMPILED, hardware UNTESTED; exact module model pending"
   },
-  "current_next_step": "Validate microSD filesystem, sample directory, WAV enumeration, and PSRAM loading"
+  "current_next_step": "Verify microSD breakout wiring/card mount, then validate sample directory, WAV enumeration, and PSRAM loading"
 }

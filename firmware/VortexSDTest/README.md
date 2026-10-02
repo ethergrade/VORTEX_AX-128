@@ -25,11 +25,11 @@ Use a card with a FAT filesystem. On the computer, create `/samples` and copy [`
 
 ## Run
 
-1. Open `VortexSDTest.ino` in Arduino IDE. Select `ESP32S3 Dev Module`, 16 MB flash, OPI 8 MB PSRAM, and `USB CDC On Boot: Enabled`.
+1. Open `VortexSDTest.ino` in Arduino IDE. Select `ESP32S3 Dev Module`, 16 MB flash, OPI 8 MB PSRAM, and `USB CDC On Boot: Disabled` for the currently connected USB-to-UART port.
 2. With USB disconnected, make the six connections exactly as labeled on the module, check them, then upload this separate test sketch.
 3. Open Serial Monitor at 115200 baud and reset the ESP32-S3 if the initial messages were missed.
 
-The sketch mounts the card at 4 MHz SPI, reports capacity, lists `.wav` files in `/samples`, checks RIFF/WAVE PCM16 mono/stereo headers, and copies up to 64 KiB of the first compatible file's audio data to PSRAM. A checksum is printed to show the bytes were read. The scan is read-only and does not play audio.
+The sketch mounts the card at 4 MHz SPI, holds the display's `LCD_CS` (`GPIO1`) high, reports capacity, lists `.wav` files in `/samples`, checks RIFF/WAVE PCM16 mono/stereo headers, and copies up to 64 KiB of the first compatible file's audio data to PSRAM. A checksum is printed to show the bytes were read. The scan is read-only and does not play audio.
 
 Expected successful lines include:
 
@@ -43,11 +43,11 @@ Risultato: 1 WAV, 1 PCM16 compatibili, PSRAM OK.
 
 `49EA2D8F` is the expected checksum for the first 65,536 audio bytes of the supplied test WAV. A different WAV will have a different checksum.
 
-The software is ready to compile; card detection and the physical SPI wiring still require a bench test.
+The sketch compiles and its serial diagnostics have been observed through the connected USB-to-UART port. The microSD is not mounting yet; card detection and the physical SPI wiring still need correction and a successful bench test.
 
 ## No text in Serial Monitor
 
-The sketch starts the one-shot diagnostic 1.5 seconds after reset and does not wait on the CDC connection-state flag. Open Serial Monitor on the current `/dev/cu.usbmodem...` port at **115200 baud**, then press the ESP32-S3 `RST` button once. If the startup lines were missed, reset once more with the monitor open. The test prints card/WAV/PSRAM results as text; it does not play audio, so silence at the audio output is expected.
+The current `/dev/cu.usbmodem...` port is the board's USB-to-UART bridge, so `USB CDC On Boot` must be **Disabled** for `Serial` to use UART0 on that port. The sketch starts the one-shot diagnostic 1.5 seconds after reset. Open Serial Monitor at **115200 baud**, then press `RST` once. If the startup lines were missed, reset once more with the monitor open.
 
 This diagnostic reads the WAV and copies up to 64 KiB into PSRAM. **It does not play audio**, so silence at the audio output is expected during this test. Successful results appear as text in Serial Monitor.
 
@@ -66,7 +66,7 @@ For Arduino IDE, select these values in the board/tool menus:
 |---|---|
 | Board | `ESP32S3 Dev Module` |
 | USB Mode | `Hardware CDC and JTAG` |
-| USB CDC On Boot | `Enabled` |
+| USB CDC On Boot | `Disabled` |
 | CPU Frequency | `240MHz (WiFi)` |
 | Flash Mode | `QIO 80MHz` |
 | Flash Size | `16MB` |
