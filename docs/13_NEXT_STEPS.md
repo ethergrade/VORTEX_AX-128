@@ -8,7 +8,9 @@ The scanner is configured for eight rows and sixteen columns. The user confirmed
 
 ## Next — microSD
 
-Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**; serial output confirmed through UART0). The first card attempt reports `microSD non montata`. Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments. The sketch keeps the shared display chip select inactive during the SD test.
+Prepared firmware: `firmware/VortexSDTest/` (**COMPILED**; serial output confirmed through UART0). The card still reports `microSD non montata` after the user soldered a replacement SD module. The card is FAT32, named `VAULT`, with the WAV currently in its root. The sketch's `/samples` requirement applies only after mounting succeeds, so it does not explain this mount error. Use the photo-backed six-pad wiring in `docs/20_MICROSD_SPI_TEST_WIRING.md`; the signal GPIOs are temporary test assignments.
+
+Next diagnostic: power off and disconnect the display module entirely from power and SPI, then test the external SD breakout alone. Capture the complete serial output and a clear photo of the replacement module showing its pin labels and wires. Do not change GPIO assignments until the replacement module's pinout is confirmed.
 
 Validate:
 
